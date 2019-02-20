@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="dm_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dm_db.dbo.core_User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="core_User">
+          <Key>
+            <PropertyRef Name="id_User" />
+            <PropertyRef Name="Pwd" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="SecLevel" />
+          </Key>
+          <Property Name="id_User" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Pwd" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FaceBook" Type="nvarchar" MaxLength="100" />
+          <Property Name="Instagram" Type="nvarchar" MaxLength="100" />
+          <Property Name="Twitter" Type="nvarchar" MaxLength="100" />
+          <Property Name="SnapChat" Type="nvarchar" MaxLength="100" />
+          <Property Name="SecLevel" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="movie_Review">
+          <Key>
+            <PropertyRef Name="id_Review" />
+            <PropertyRef Name="id_Reviewer" />
+            <PropertyRef Name="MovieTitle" />
+            <PropertyRef Name="Review" />
+            <PropertyRef Name="OverAllPoints" />
+            <PropertyRef Name="ScriptPoints" />
+            <PropertyRef Name="ActingPoints" />
+            <PropertyRef Name="EffectsPoints" />
+            <PropertyRef Name="SoundPoints" />
+          </Key>
+          <Property Name="id_Review" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMDBID" Type="int" />
+          <Property Name="id_Reviewer" Type="int" Nullable="false" />
+          <Property Name="MovieTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReviewTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="Review" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="OverAllPoints" Type="int" Nullable="false" />
+          <Property Name="ScriptPoints" Type="int" Nullable="false" />
+          <Property Name="ActingPoints" Type="int" Nullable="false" />
+          <Property Name="EffectsPoints" Type="int" Nullable="false" />
+          <Property Name="SoundPoints" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="dm_dbModelStoreContainer">
+          <EntitySet Name="core_User" EntityType="Self.core_User" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [core_User].[id_User] AS [id_User], 
+    [core_User].[Pwd] AS [Pwd], 
+    [core_User].[FirstName] AS [FirstName], 
+    [core_User].[LastName] AS [LastName], 
+    [core_User].[Email] AS [Email], 
+    [core_User].[FaceBook] AS [FaceBook], 
+    [core_User].[Instagram] AS [Instagram], 
+    [core_User].[Twitter] AS [Twitter], 
+    [core_User].[SnapChat] AS [SnapChat], 
+    [core_User].[SecLevel] AS [SecLevel]
+    FROM [dbo].[core_User] AS [core_User]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="movie_Review" EntityType="Self.movie_Review" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [movie_Review].[id_Review] AS [id_Review], 
+    [movie_Review].[IMDBID] AS [IMDBID], 
+    [movie_Review].[id_Reviewer] AS [id_Reviewer], 
+    [movie_Review].[MovieTitle] AS [MovieTitle], 
+    [movie_Review].[ReviewTitle] AS [ReviewTitle], 
+    [movie_Review].[Review] AS [Review], 
+    [movie_Review].[OverAllPoints] AS [OverAllPoints], 
+    [movie_Review].[ScriptPoints] AS [ScriptPoints], 
+    [movie_Review].[ActingPoints] AS [ActingPoints], 
+    [movie_Review].[EffectsPoints] AS [EffectsPoints], 
+    [movie_Review].[SoundPoints] AS [SoundPoints]
+    FROM [dbo].[movie_Review] AS [movie_Review]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dm_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="core_User">
+          <Key>
+            <PropertyRef Name="id_User" />
+            <PropertyRef Name="Pwd" />
+            <PropertyRef Name="FirstName" />
+            <PropertyRef Name="LastName" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="SecLevel" />
+          </Key>
+          <Property Name="id_User" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Pwd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FaceBook" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Instagram" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Twitter" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SnapChat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SecLevel" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="movie_Review">
+          <Key>
+            <PropertyRef Name="id_Review" />
+            <PropertyRef Name="id_Reviewer" />
+            <PropertyRef Name="MovieTitle" />
+            <PropertyRef Name="Review" />
+            <PropertyRef Name="OverAllPoints" />
+            <PropertyRef Name="ScriptPoints" />
+            <PropertyRef Name="ActingPoints" />
+            <PropertyRef Name="EffectsPoints" />
+            <PropertyRef Name="SoundPoints" />
+          </Key>
+          <Property Name="id_Review" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMDBID" Type="Int32" />
+          <Property Name="id_Reviewer" Type="Int32" Nullable="false" />
+          <Property Name="MovieTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReviewTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Review" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OverAllPoints" Type="Int32" Nullable="false" />
+          <Property Name="ScriptPoints" Type="Int32" Nullable="false" />
+          <Property Name="ActingPoints" Type="Int32" Nullable="false" />
+          <Property Name="EffectsPoints" Type="Int32" Nullable="false" />
+          <Property Name="SoundPoints" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="dm_dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="core_User" EntityType="Self.core_User" />
+          <EntitySet Name="movie_Review" EntityType="Self.movie_Review" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dm_dbModelStoreContainer" CdmEntityContainer="dm_dbEntities">
+          <EntitySetMapping Name="core_User">
+            <EntityTypeMapping TypeName="dm_dbModel.core_User">
+              <MappingFragment StoreEntitySet="core_User">
+                <ScalarProperty Name="id_User" ColumnName="id_User" />
+                <ScalarProperty Name="Pwd" ColumnName="Pwd" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FaceBook" ColumnName="FaceBook" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="SnapChat" ColumnName="SnapChat" />
+                <ScalarProperty Name="SecLevel" ColumnName="SecLevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movie_Review">
+            <EntityTypeMapping TypeName="dm_dbModel.movie_Review">
+              <MappingFragment StoreEntitySet="movie_Review">
+                <ScalarProperty Name="id_Review" ColumnName="id_Review" />
+                <ScalarProperty Name="IMDBID" ColumnName="IMDBID" />
+                <ScalarProperty Name="id_Reviewer" ColumnName="id_Reviewer" />
+                <ScalarProperty Name="MovieTitle" ColumnName="MovieTitle" />
+                <ScalarProperty Name="ReviewTitle" ColumnName="ReviewTitle" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="OverAllPoints" ColumnName="OverAllPoints" />
+                <ScalarProperty Name="ScriptPoints" ColumnName="ScriptPoints" />
+                <ScalarProperty Name="ActingPoints" ColumnName="ActingPoints" />
+                <ScalarProperty Name="EffectsPoints" ColumnName="EffectsPoints" />
+                <ScalarProperty Name="SoundPoints" ColumnName="SoundPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
