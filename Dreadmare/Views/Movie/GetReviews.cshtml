@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
 <table>
-    <tr><td>Movie Title</td><td>Overall Score</td></tr>
+    <tr><td class="HeaderRow TitleColumn">Movie Title</td><td class="HeaderRow ScoreColumn">Overall Score</td></tr>
     @if (Model != null)
     {
         foreach (var movie in Model.Reviews)

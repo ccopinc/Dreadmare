@@ -2,7 +2,7 @@
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: black;
-    color: red;
+    color: lightgray;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -16,4 +16,19 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+/*Review Tables*/
+.HeaderRow {
+    background-image: url('../Images/ReviewHeader.gif');
+}
+
+.TitleColumn {
+    width: 150px;
+    font-size: 14pt;
+}
+.ScoreColumn {
+    width: 100px;
+    font-size: 14pt;
 }
