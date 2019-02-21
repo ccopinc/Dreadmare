@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Runtime.Remoting.Messaging;
 using System.Web.Http;
 using System.Web.Mvc;
+using Dreadmare.DTOModels;
 using Dreadmare.Managers;
 
 //using System.ServiceModel;
@@ -13,15 +14,16 @@ using Dreadmare.Managers;
 
 namespace Dreadmare.Controllers
 {
-    public class MovieController : ApiController
+    public class MovieController : Controller
     {
         MovieManager movieManager = new MovieManager();
 
         [System.Web.Http.HttpGet]
         [System.Web.Http.Route("api/Movie/GetReviews/")]
-        public IHttpActionResult GetReviews()
+        public ActionResult GetReviews()
         {
-            return Ok(movieManager.GetMovieReviewList());
+            var reviews = movieManager.GetMovieReviewList();
+            return View(reviews);
         }
 
        

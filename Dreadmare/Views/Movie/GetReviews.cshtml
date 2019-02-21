@@ -1,0 +1,17 @@
+﻿@model Dreadmare.DTOModels.ReviewsViewModel
+
+@{
+    ViewBag.Title = "GetReviews";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<table>
+    <tr><td>Movie Title</td><td>Overall Score</td></tr>
+    @if (Model != null)
+    {
+        foreach (var movie in Model.Reviews)
+        {
+            <tr><td>@movie.MovieTitle</td><td>@movie.OverAllPoints</td></tr>
+        }
+    }
+</table>
+

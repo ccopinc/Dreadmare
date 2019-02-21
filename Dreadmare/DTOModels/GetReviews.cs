@@ -8,12 +8,12 @@ using Dreadmare;
 
 namespace Dreadmare.DTOModels
 {
-    public class MovieReview
+    public class GetReviews
     {
         ////BCC/ BEGIN CUSTOM CODE SECTION 
         ////ECC/ END CUSTOM CODE SECTION 
         public int id_Review { get; set; }
-        public Nullable<int> IMDBID { get; set; }
+        public string IMDBID { get; set; }
         public int id_Reviewer { get; set; }
         public string MovieTitle { get; set; }
         public string ReviewTitle { get; set; }

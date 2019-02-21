@@ -13,7 +13,7 @@ namespace Dreadmare
     {
         public MappingProfile()
         {
-            CreateMap<List<movie_Review>, List<MovieReview>>();
+            CreateMap<List<movie_Review>, List<GetReviews>>();
         }
     }
 }
