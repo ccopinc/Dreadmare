@@ -27,5 +27,6 @@ namespace Dreadmare
     
         public virtual DbSet<core_User> core_User { get; set; }
         public virtual DbSet<movie_Review> movie_Review { get; set; }
+        public virtual DbSet<movie_News> movie_News { get; set; }
     }
 }

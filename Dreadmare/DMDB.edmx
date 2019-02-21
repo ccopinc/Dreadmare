@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="dm_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="dm_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <!--Errors Found During Generation:
 warning 6002: The table/view 'dm_db.dbo.core_User' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="core_User">
@@ -28,6 +28,20 @@ warning 6002: The table/view 'dm_db.dbo.core_User' does not have a primary key d
           <Property Name="SecLevel" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'dm_db.dbo.movie_News' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="movie_News">
+          <Key>
+            <PropertyRef Name="id_MovieNews" />
+            <PropertyRef Name="IMDB_ID" />
+          </Key>
+          <Property Name="id_MovieNews" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMDB_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MovieTitle" Type="nvarchar" MaxLength="100" />
+          <Property Name="News" Type="nvarchar(max)" />
+          <Property Name="NewsDate" Type="datetime" />
+          <Property Name="NewsBy" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="movie_Review">
           <Key>
@@ -42,7 +56,7 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
             <PropertyRef Name="SoundPoints" />
           </Key>
           <Property Name="id_Review" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IMDBID" Type="int" />
+          <Property Name="IMDB_ID" Type="nvarchar" MaxLength="50" />
           <Property Name="id_Reviewer" Type="int" Nullable="false" />
           <Property Name="MovieTitle" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="ReviewTitle" Type="nvarchar" MaxLength="100" />
@@ -52,6 +66,7 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
           <Property Name="ActingPoints" Type="int" Nullable="false" />
           <Property Name="EffectsPoints" Type="int" Nullable="false" />
           <Property Name="SoundPoints" Type="int" Nullable="false" />
+          <Property Name="ReviewDate" Type="datetime" />
         </EntityType>
         <EntityContainer Name="dm_dbModelStoreContainer">
           <EntitySet Name="core_User" EntityType="Self.core_User" store:Type="Tables" store:Schema="dbo">
@@ -68,10 +83,20 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
     [core_User].[SecLevel] AS [SecLevel]
     FROM [dbo].[core_User] AS [core_User]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="movie_News" EntityType="Self.movie_News" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [movie_News].[id_MovieNews] AS [id_MovieNews], 
+    [movie_News].[IMDB_ID] AS [IMDB_ID], 
+    [movie_News].[MovieTitle] AS [MovieTitle], 
+    [movie_News].[News] AS [News], 
+    [movie_News].[NewsDate] AS [NewsDate], 
+    [movie_News].[NewsBy] AS [NewsBy]
+    FROM [dbo].[movie_News] AS [movie_News]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="movie_Review" EntityType="Self.movie_Review" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [movie_Review].[id_Review] AS [id_Review], 
-    [movie_Review].[IMDBID] AS [IMDBID], 
+    [movie_Review].[IMDB_ID] AS [IMDB_ID], 
     [movie_Review].[id_Reviewer] AS [id_Reviewer], 
     [movie_Review].[MovieTitle] AS [MovieTitle], 
     [movie_Review].[ReviewTitle] AS [ReviewTitle], 
@@ -80,12 +105,12 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
     [movie_Review].[ScriptPoints] AS [ScriptPoints], 
     [movie_Review].[ActingPoints] AS [ActingPoints], 
     [movie_Review].[EffectsPoints] AS [EffectsPoints], 
-    [movie_Review].[SoundPoints] AS [SoundPoints]
+    [movie_Review].[SoundPoints] AS [SoundPoints], 
+    [movie_Review].[ReviewDate] AS [ReviewDate]
     FROM [dbo].[movie_Review] AS [movie_Review]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dm_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -122,7 +147,6 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
             <PropertyRef Name="SoundPoints" />
           </Key>
           <Property Name="id_Review" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IMDBID" Type="Int32" />
           <Property Name="id_Reviewer" Type="Int32" Nullable="false" />
           <Property Name="MovieTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ReviewTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -132,11 +156,26 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
           <Property Name="ActingPoints" Type="Int32" Nullable="false" />
           <Property Name="EffectsPoints" Type="Int32" Nullable="false" />
           <Property Name="SoundPoints" Type="Int32" Nullable="false" />
+          <Property Name="IMDB_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ReviewDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="dm_dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="core_User" EntityType="Self.core_User" />
           <EntitySet Name="movie_Review" EntityType="Self.movie_Review" />
+          <EntitySet Name="movie_News" EntityType="dm_dbModel.movie_News" />
         </EntityContainer>
+        <EntityType Name="movie_News">
+          <Key>
+            <PropertyRef Name="id_MovieNews" />
+            <PropertyRef Name="IMDB_ID" />
+          </Key>
+          <Property Name="id_MovieNews" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMDB_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MovieTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="News" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewsDate" Type="DateTime" Precision="3" />
+          <Property Name="NewsBy" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -162,8 +201,9 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
           <EntitySetMapping Name="movie_Review">
             <EntityTypeMapping TypeName="dm_dbModel.movie_Review">
               <MappingFragment StoreEntitySet="movie_Review">
+                <ScalarProperty Name="ReviewDate" ColumnName="ReviewDate" />
+                <ScalarProperty Name="IMDB_ID" ColumnName="IMDB_ID" />
                 <ScalarProperty Name="id_Review" ColumnName="id_Review" />
-                <ScalarProperty Name="IMDBID" ColumnName="IMDBID" />
                 <ScalarProperty Name="id_Reviewer" ColumnName="id_Reviewer" />
                 <ScalarProperty Name="MovieTitle" ColumnName="MovieTitle" />
                 <ScalarProperty Name="ReviewTitle" ColumnName="ReviewTitle" />
@@ -173,6 +213,18 @@ warning 6002: The table/view 'dm_db.dbo.movie_Review' does not have a primary ke
                 <ScalarProperty Name="ActingPoints" ColumnName="ActingPoints" />
                 <ScalarProperty Name="EffectsPoints" ColumnName="EffectsPoints" />
                 <ScalarProperty Name="SoundPoints" ColumnName="SoundPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movie_News">
+            <EntityTypeMapping TypeName="dm_dbModel.movie_News">
+              <MappingFragment StoreEntitySet="movie_News">
+                <ScalarProperty Name="NewsBy" ColumnName="NewsBy" />
+                <ScalarProperty Name="NewsDate" ColumnName="NewsDate" />
+                <ScalarProperty Name="News" ColumnName="News" />
+                <ScalarProperty Name="MovieTitle" ColumnName="MovieTitle" />
+                <ScalarProperty Name="IMDB_ID" ColumnName="IMDB_ID" />
+                <ScalarProperty Name="id_MovieNews" ColumnName="id_MovieNews" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

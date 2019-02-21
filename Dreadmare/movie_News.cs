@@ -12,19 +12,13 @@ namespace Dreadmare
     using System;
     using System.Collections.Generic;
     
-    public partial class movie_Review
+    public partial class movie_News
     {
-        public int id_Review { get; set; }
-        public int id_Reviewer { get; set; }
-        public string MovieTitle { get; set; }
-        public string ReviewTitle { get; set; }
-        public string Review { get; set; }
-        public int OverAllPoints { get; set; }
-        public int ScriptPoints { get; set; }
-        public int ActingPoints { get; set; }
-        public int EffectsPoints { get; set; }
-        public int SoundPoints { get; set; }
+        public int id_MovieNews { get; set; }
         public string IMDB_ID { get; set; }
-        public Nullable<System.DateTime> ReviewDate { get; set; }
+        public string MovieTitle { get; set; }
+        public string News { get; set; }
+        public Nullable<System.DateTime> NewsDate { get; set; }
+        public Nullable<int> NewsBy { get; set; }
     }
 }
