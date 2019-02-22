@@ -207,7 +207,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\MovieReviews.png" />
     <Content Include="Images\ReviewHeader.gif" />
+    <Content Include="Images\skull.png" />
     <Content Include="Images\Title.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

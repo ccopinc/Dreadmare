@@ -6,8 +6,13 @@
     @RenderSection("head", required: false)
 </head>
 <body>
-<img src="~/Images/Title.png" />
-<table>
+<div style="position: Absolute; top: 0px;">
+    <img src="~/Images/Title.png" />
+</div>
+<div style="position: Absolute; top: 100px; left: 0px;">
+    <img src="~/Images/skull.png" />
+</div>
+<table style="position: Absolute; top: 200px;">
     <tr>
         <td style="width: 33%;"></td>
         <td>@RenderBody()</td>

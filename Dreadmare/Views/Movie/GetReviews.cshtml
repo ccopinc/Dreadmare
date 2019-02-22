@@ -4,14 +4,19 @@
     ViewBag.Title = "GetReviews";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
-<table>
-    <tr><td class="HeaderRow TitleColumn">Movie Title</td><td class="HeaderRow ScoreColumn">Overall Score</td></tr>
+
+<div id="PageTitle" style="position: absolute; left: 200px; top:-50px;">
+    <img src="~/Images/MovieReviews.png" />
+</div>
+<table cellpadding='0' cellspacing='0'>
+    <tr><td class="HeaderRow TitleColumn">Movie Title</td><td class="HeaderRow ScoreColumn">Rating</td></tr>
     @if (Model != null)
     {
         foreach (var movie in Model.Reviews)
         {
-            <tr><td>@movie.MovieTitle</td><td>@movie.OverAllPoints</td></tr>
+            <tr><td>@movie.MovieTitle</td><td class ="ScoreColumns">@movie.OverAllPoints</td></tr>
         }
     }
 </table>
+
 
