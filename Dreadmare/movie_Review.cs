@@ -15,6 +15,7 @@ namespace Dreadmare
     public partial class movie_Review
     {
         public int id_Review { get; set; }
+        public string IMDB_ID { get; set; }
         public int id_Reviewer { get; set; }
         public string MovieTitle { get; set; }
         public string ReviewTitle { get; set; }
@@ -24,7 +25,7 @@ namespace Dreadmare
         public int ActingPoints { get; set; }
         public int EffectsPoints { get; set; }
         public int SoundPoints { get; set; }
-        public string IMDB_ID { get; set; }
         public Nullable<System.DateTime> ReviewDate { get; set; }
+        public int TotalScore { get; set; }
     }
 }

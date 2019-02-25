@@ -1,4 +1,11 @@
-﻿body {
+﻿
+@font-face {
+    font-family: 'The Macabre';
+    src: url('The Macabre.otf') format('opentype');
+}
+
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: black;
@@ -33,5 +40,13 @@ textarea {
     font-size: 14pt;
     text-align: center;
 }
+
+
+.Quote-text {
+    font-family: The Macabre;
+    font-size: 18pt;
+}
+
+
 
 

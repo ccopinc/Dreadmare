@@ -3,18 +3,66 @@
 <head>
     <title>@Page.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
+    <style type="text/css">
+        #list {
+            max-height:0;
+            overflow:hidden;
+            transition:0.5s linear;
+        }
+        a:focus + #list {
+            max-height:15em;
+        }
+        a:focus {
+            pointer-events:none;
+        }
+        /*MENU STUFF*/
+        .menu-home {
+            height: 50px;
+            width: 150px;
+            background: url('../images/nav/Home_Link.png');
+            display: block;
+        }
+        .menu-home:hover {
+            background: url('../Images/Nav/Home_Over.png');
+        }
+        .menu-movie {
+            height: 50px;
+            width: 150px;
+            background: url('../images/nav/movie_Link.png');
+            display: block;
+        }
+
+            .menu-movie:hover {
+                background: url('../Images/Nav/movie_Over.png');
+            }
+    </style>
     @RenderSection("head", required: false)
 </head>
 <body>
 <div style="position: Absolute; top: 0px;">
     <img src="~/Images/Title.png" />
 </div>
-<div style="position: Absolute; top: 100px; left: 0px;">
-    <img src="~/Images/skull.png" />
-</div>
+
 <table style="position: Absolute; top: 200px;">
     <tr>
-        <td style="width: 33%;"></td>
+        <td style="width: 33%;">
+            <nav>
+                <ul style="list-style-type:none">
+                    <li><div class="menu-home"><a href="#"></a><span class="menu-home-over"></span></div></li>
+                    <li><div class="menu-movie"><a href="#"></a><span class="menu-movie-over"></span></div></li>
+                    
+                    <li><a href="#nowhere" >Portfolio</a>
+                        <ul id="list" style="list-style-type: none; background-color: maroon;">
+                            <li style ="text-decoration: none; color: white;"><a href="#">Comerciais</a> </li>
+                            <li style="text-decoration: none; color: white;"><a href="#">Residenciais</a> </li>
+                            <li style="text-decoration: none; color: white;"><a href="#">Institucionais</a> </li>
+                            <li style="text-decoration: none; color: white;"><a href="#">Edifícios</a> </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Contato</a> </li>
+                </ul>
+            </nav>
+        </td>
         <td>@RenderBody()</td>
         <td style="width: 33%;"></td>
     </tr>

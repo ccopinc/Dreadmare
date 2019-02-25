@@ -1,0 +1,14 @@
+﻿@model Dreadmare.DTOModels.Quotes
+
+@{
+    ViewBag.Title = "GetQuote";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+<table>
+    <tr>
+        <td class="Quote-text">@Model.Quote</td>
+        <td><img src="../@Model.QuoteByImage" /><br />@Model.QuoteBy</td>
+    </tr>
+</table>
+
+
