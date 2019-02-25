@@ -4,10 +4,10 @@
     ViewBag.Title = "GetQuote";
     Layout = "~/Views/Shared/_Layout1.cshtml";
 }
-<table>
+<table style="width: 650px;">
     <tr>
-        <td class="Quote-text">@Model.Quote</td>
-        <td><img src="../@Model.QuoteByImage" /><br />@Model.QuoteBy</td>
+        <td class="Quote-text" style="width: 300px;">@Model.Quote</td>
+        <td style="width: 300px;"><img src="../@Model.QuoteByImage" /><br />@Model.QuoteBy</td>
     </tr>
 </table>
 

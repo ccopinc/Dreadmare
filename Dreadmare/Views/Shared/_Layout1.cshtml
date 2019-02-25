@@ -35,6 +35,23 @@
             .menu-movie:hover {
                 background: url('../Images/Nav/movie_Over.png');
             }
+        .menu-writing {
+            height: 50px;
+            width: 150px;
+            background: url('../images/nav/writing_Link.png');
+            display: block;
+        }
+
+        .menu-writing:hover {
+            background: url('../Images/Nav/writing_Over.png');
+        }
+
+
+
+        .Quote-text {
+            font-family: The Macabre;
+            font-size: 38pt;
+        }
     </style>
     @RenderSection("head", required: false)
 </head>
@@ -43,27 +60,28 @@
     <img src="~/Images/Title.png" />
 </div>
 
-<table style="position: Absolute; top: 200px;">
-    <tr>
-        <td style="width: 33%;">
+<table style="position: Absolute; top:0px;">
+    <tr style="vert-align: top;">
+        <td style="width: 33%; padding-top: -150px; ">
             <nav>
                 <ul style="list-style-type:none">
                     <li><div class="menu-home"><a href="#"></a><span class="menu-home-over"></span></div></li>
                     <li><div class="menu-movie"><a href="#"></a><span class="menu-movie-over"></span></div></li>
                     
-                    <li><a href="#nowhere" >Portfolio</a>
+                    <li><div class="menu-writing"><a href="#nowhere" ></a><span class="menu-writing-over"></span>
                         <ul id="list" style="list-style-type: none; background-color: maroon;">
                             <li style ="text-decoration: none; color: white;"><a href="#">Comerciais</a> </li>
                             <li style="text-decoration: none; color: white;"><a href="#">Residenciais</a> </li>
                             <li style="text-decoration: none; color: white;"><a href="#">Institucionais</a> </li>
                             <li style="text-decoration: none; color: white;"><a href="#">Edifícios</a> </li>
                         </ul>
+                        </div>
                     </li>
                     <li><a href="#">Contato</a> </li>
                 </ul>
             </nav>
         </td>
-        <td>@RenderBody()</td>
+        <td style="padding-top: 200px;">@RenderBody()</td>
         <td style="width: 33%;"></td>
     </tr>
 </table>
