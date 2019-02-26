@@ -3,19 +3,12 @@
 <head>
     <title>@Page.Title</title>
     <link href="~/Content/Site.css" rel="stylesheet" />
+
     <style type="text/css">
-        #list {
-            max-height:0;
-            overflow:hidden;
-            transition:0.5s linear;
-        }
-        a:focus + #list {
-            max-height:15em;
-        }
-        a:focus {
-            pointer-events:none;
-        }
+   
         /*MENU STUFF*/
+
+
         .menu-home {
             height: 50px;
             width: 150px;
@@ -32,9 +25,9 @@
             display: block;
         }
 
-            .menu-movie:hover {
-                background: url('../Images/Nav/movie_Over.png');
-            }
+        .menu-movie:hover {
+            background: url('../Images/Nav/movie_Over.png');
+        }
         .menu-writing {
             height: 50px;
             width: 150px;
@@ -46,11 +39,55 @@
             background: url('../Images/Nav/writing_Over.png');
         }
 
+        .menu-gaming {
+            height: 50px;
+            width: 150px;
+            background: url('../images/nav/gaming_Link.png');
+            display: block;
+        }
 
+        .menu-gaming:hover {
+            background: url('../Images/Nav/gaming_Over.png');
+        }
+
+        .menu-about {
+            height: 50px;
+            width: 150px;
+            background: url('../images/nav/about_Link.png');
+            display: block;
+        }
+
+        .menu-about:hover {
+            background: url('../Images/Nav/about_Over.png');
+        }
+
+        /*     END OF MENU STUFF     */
 
         .Quote-text {
             font-family: The Macabre;
             font-size: 38pt;
+        }
+
+        .QuoteBy-text {
+            font-family: The Macabre;
+            font-size: 18pt;
+        }
+
+
+        /* Style the button that is used to open and close the collapsible content */
+        .collapsible {
+            cursor: pointer;
+            border: none;
+            text-align: left;
+            outline: none;
+        }
+
+        /* Style the collapsible content. Note: hidden by default */
+        .content {
+            padding: 0 18px;
+            display: none;
+            overflow: hidden;
+            background-color: #f1f1f1;
         }
     </style>
     @RenderSection("head", required: false)
@@ -62,29 +99,51 @@
 
 <table style="position: Absolute; top:0px;">
     <tr style="vert-align: top;">
-        <td style="width: 33%; padding-top: -150px; ">
+        <td style="width: 20%; padding-top: -150px; ">
             <nav>
-                <ul style="list-style-type:none">
-                    <li><div class="menu-home"><a href="#"></a><span class="menu-home-over"></span></div></li>
-                    <li><div class="menu-movie"><a href="#"></a><span class="menu-movie-over"></span></div></li>
-                    
-                    <li><div class="menu-writing"><a href="#nowhere" ></a><span class="menu-writing-over"></span>
-                        <ul id="list" style="list-style-type: none; background-color: maroon;">
-                            <li style ="text-decoration: none; color: white;"><a href="#">Comerciais</a> </li>
+
+                    <div class="menu-home"><a href="#"></a></div>
+                    <div class="menu-movie"><a href="#"></a></div>
+                    <div class="menu-writing collapsible" onclick="openMenu(this)"> 
+
+                        <ul id="write_list" class="content" style="list-style-type: none;">
+                            <li style="text-decoration: none; color: white;"><a href="#">Comerciais</a> </li>
                             <li style="text-decoration: none; color: white;"><a href="#">Residenciais</a> </li>
                             <li style="text-decoration: none; color: white;"><a href="#">Institucionais</a> </li>
                             <li style="text-decoration: none; color: white;"><a href="#">Edifícios</a> </li>
                         </ul>
-                        </div>
-                    </li>
-                    <li><a href="#">Contato</a> </li>
-                </ul>
+                    </div>
+                    <div class="menu-gaming"><a href="#"></a></div>
+                    <div class="menu-about"><a href="#"></a></div>
             </nav>
+
+
         </td>
-        <td style="padding-top: 200px;">@RenderBody()</td>
-        <td style="width: 33%;"></td>
+        <td style="padding-top: 150px;">@RenderBody()</td>
+        <td style="width: 20%;"></td>
     </tr>
 </table>
+<script type ="text/javascript">
+    function openMenu(class) {
 
+        var coll = document.getElementsByClassName(class);
+        var i;
+
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click",
+                function() {
+                    this.classList.toggle("active");
+                    var content = this.nextSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        content.style.display = "block";
+                    }
+                });
+        }
+    }
+</script>
 </body>
 </html>
+
+

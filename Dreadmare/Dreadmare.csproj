@@ -214,6 +214,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\MovieReviews.png" />
+    <Content Include="Images\Nav\About_Link.png" />
+    <Content Include="Images\Nav\About_over.png" />
     <Content Include="Images\Nav\Convention_Link.png" />
     <Content Include="Images\Nav\Convention_Over.png" />
     <Content Include="Images\Nav\Gaming_Link.png" />
