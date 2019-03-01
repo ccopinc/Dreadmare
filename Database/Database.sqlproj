@@ -66,6 +66,7 @@
     <Build Include="Tables\movie_Review.sql" />
     <Build Include="Tables\quote_Quote.sql" />
     <Build Include="Tables\writing_Writing.sql" />
+    <Build Include="up_movie_GetReviewerInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InsertScripts\InsertData.sql" />

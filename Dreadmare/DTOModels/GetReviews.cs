@@ -15,6 +15,8 @@ namespace Dreadmare.DTOModels
         public int id_Review { get; set; }
         public string IMDBID { get; set; }
         public int id_Reviewer { get; set; }
+        public string Reviewer { get; set; }
+        public string UserReviewCount { get; set; }
         public string MovieTitle { get; set; }
         public string ReviewTitle { get; set; }
         public string Review { get; set; }
@@ -23,5 +25,8 @@ namespace Dreadmare.DTOModels
         public int ActingPoints { get; set; }
         public int EffectsPoints { get; set; }
         public int SoundPoints { get; set; }
+        public int TotalPoints { get; set; }
+
+        public string ReviewDate { get; set; }
     }
 }

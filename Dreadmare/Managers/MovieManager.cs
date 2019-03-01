@@ -23,7 +23,8 @@ namespace Dreadmare.Managers
                 GetReviews r = new GetReviews()
                 {
                     id_Review =  mr.id_Review,
-                    id_Reviewer = mr.id_Reviewer,
+                    Reviewer = GetReviewer(mr.id_Reviewer).FirstName,
+                    UserReviewCount = GetReviewer(mr.id_Reviewer).Reviews.ToString(),
                     IMDBID = mr.IMDB_ID,
                     MovieTitle =  mr.MovieTitle,
                     ReviewTitle = mr.ReviewTitle,
@@ -32,9 +33,13 @@ namespace Dreadmare.Managers
                     ScriptPoints = mr.ScriptPoints,
                     SoundPoints = mr.SoundPoints,
                     EffectsPoints = mr.EffectsPoints,
-                    ActingPoints = mr.ActingPoints
-
+                    ActingPoints = mr.ActingPoints,
+                    TotalPoints =  mr.TotalScore
                 };
+                // short date
+                DateTime d = mr.ReviewDate.Value;
+                r.ReviewDate = d.ToShortDateString();
+
                 reviews.Add(r);
             }
 
@@ -43,6 +48,13 @@ namespace Dreadmare.Managers
             
             return MovieReviews;
 
+        }
+
+        public up_movie_GetReviewerInfo_Result GetReviewer(int id)
+        {
+            string name = "";
+            var user = db.up_movie_GetReviewerInfo(id).FirstOrDefault();
+            return user;
         }
     }
 }

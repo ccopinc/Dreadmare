@@ -12,6 +12,8 @@ namespace Dreadmare
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class dm_dbEntities : DbContext
     {
@@ -29,5 +31,15 @@ namespace Dreadmare
         public virtual DbSet<movie_News> movie_News { get; set; }
         public virtual DbSet<movie_Review> movie_Review { get; set; }
         public virtual DbSet<quote_Quote> quote_Quote { get; set; }
+        public virtual DbSet<writing_Writing> writing_Writing { get; set; }
+    
+        public virtual ObjectResult<up_movie_GetReviewerInfo_Result> up_movie_GetReviewerInfo(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<up_movie_GetReviewerInfo_Result>("up_movie_GetReviewerInfo", idParameter);
+        }
     }
 }

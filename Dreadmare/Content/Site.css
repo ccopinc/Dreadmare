@@ -29,16 +29,38 @@ textarea {
 /*Review Tables*/
 .HeaderRow {
     background-image: url('../Images/ReviewHeader.gif');
+    font-size: 22pt;
+    font-family: The Macabre;
+    color: black;
+    text-align: center;
+}
+
+.ReviewRow {
+    font-size: 16pt;
+    font-family: The Macabre;
+    text-align: center;
+    padding-top: 10px;
+}
+.MovieTitle{}
+.MovieTitle:hover {
+   color: maroon;
 }
 
 .TitleColumn {
-    width: 150px;
-    font-size: 14pt;
+    width: 300px;
+    text-align: left;
+    padding-left: 10px;
 }
+
 .ScoreColumn {
     width: 100px;
-    font-size: 14pt;
-    text-align: center;
+}
+
+.ReviewdByColumn {
+    width: 250px;
+}
+.ReviewdDateColumn {
+    width: 250px;
 }
 
 

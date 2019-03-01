@@ -9,6 +9,7 @@
         <EntityTypeShape EntityType="dm_dbModel.movie_News" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="dm_dbModel.movie_Review" Width="1.5" PointX="2.75" PointY="3.75" />
         <EntityTypeShape EntityType="dm_dbModel.quote_Quote" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dm_dbModel.writing_Writing" Width="1.5" PointX="5.375" PointY="3.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

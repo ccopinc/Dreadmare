@@ -58,11 +58,25 @@
           <Property Name="QuoteBy" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="QuoteByImage" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
+        <EntityType Name="writing_Writing">
+          <Key>
+            <PropertyRef Name="id_Writing" />
+          </Key>
+          <Property Name="id_Writing" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WritingType" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Author" Type="int" Nullable="false" />
+          <Property Name="WritingUrl" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <Function Name="up_movie_GetReviewerInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="dm_dbModelStoreContainer">
           <EntitySet Name="core_User" EntityType="Self.core_User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="movie_News" EntityType="Self.movie_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="movie_Review" EntityType="Self.movie_Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="quote_Quote" EntityType="Self.quote_Quote" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="writing_Writing" EntityType="Self.writing_Writing" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -73,6 +87,10 @@
           <EntitySet Name="movie_News" EntityType="dm_dbModel.movie_News" />
           <EntitySet Name="movie_Review" EntityType="dm_dbModel.movie_Review" />
           <EntitySet Name="quote_Quote" EntityType="dm_dbModel.quote_Quote" />
+          <EntitySet Name="writing_Writing" EntityType="dm_dbModel.writing_Writing" />
+          <FunctionImport Name="up_movie_GetReviewerInfo" ReturnType="Collection(dm_dbModel.up_movie_GetReviewerInfo_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="core_User">
           <Key>
@@ -127,6 +145,20 @@
           <Property Name="QuoteBy" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="QuoteByImage" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="writing_Writing">
+          <Key>
+            <PropertyRef Name="id_Writing" />
+          </Key>
+          <Property Name="id_Writing" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WritingType" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="Int32" Nullable="false" />
+          <Property Name="WritingUrl" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <ComplexType Name="up_movie_GetReviewerInfo_Result">
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Reviews" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -190,6 +222,25 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="writing_Writing">
+            <EntityTypeMapping TypeName="dm_dbModel.writing_Writing">
+              <MappingFragment StoreEntitySet="writing_Writing">
+                <ScalarProperty Name="WritingUrl" ColumnName="WritingUrl" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="WritingType" ColumnName="WritingType" />
+                <ScalarProperty Name="id_Writing" ColumnName="id_Writing" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="up_movie_GetReviewerInfo" FunctionName="dm_dbModel.Store.up_movie_GetReviewerInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="dm_dbModel.up_movie_GetReviewerInfo_Result">
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Reviews" ColumnName="Reviews" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

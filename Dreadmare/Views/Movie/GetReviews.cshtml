@@ -8,13 +8,23 @@
 <div id="PageTitle" style="position: absolute; top: 150px; left: 250px; ">
     <img src="~/Images/MovieReviews.png" />
 </div>
-<table cellpadding='0' cellspacing='0' style ="padding-left: 200px; position: absolute; top: 300px;">
-    <tr><td class="HeaderRow TitleColumn">Movie Title</td><td class="HeaderRow ScoreColumn">Rating</td></tr>
+<table cellpadding='0' cellspacing='0' style ="width: 900px;padding-left: 100px; position: absolute; top: 320px;">
+    <tr>
+        <td class="HeaderRow TitleColumn">Movie Title</td>
+        <td class="HeaderRow ">Rating</td>
+        <td class="HeaderRow ReviewdDateColumn">Review Date</td>
+        <td class="HeaderRow ReviewdByColumn">Reviewed By</td>
+    </tr>
     @if (Model != null)
     {
         foreach (var movie in Model.Reviews)
         {
-            <tr><td>@movie.MovieTitle</td><td class ="ScoreColumns">@movie.OverAllPoints</td></tr>
+    <tr>
+        <td class="ReviewRow TitleColumn MovieTitle"><a href="Movie/ShowReview/@movie.id_Review"></a>@movie.MovieTitle</td>
+        <td class="ReviewRow ScoreColumns">@movie.TotalPoints</td>
+        <td class="ReviewRow ReviewdDateColumn">@movie.ReviewDate</td>
+        <td class="ReviewRow ReviewdBy ">@movie.Reviewer</td>
+    </tr>
         }
     }
 </table>

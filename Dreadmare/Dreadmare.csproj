@@ -194,6 +194,12 @@
     <Compile Include="quote_Quote.cs">
       <DependentUpon>DMDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="up_movie_GetReviewerInfo_Result.cs">
+      <DependentUpon>DMDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="writing_Writing.cs">
+      <DependentUpon>DMDB.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -226,6 +232,8 @@
     <Content Include="Images\Nav\Home_Over.png" />
     <Content Include="Images\Nav\Movie_Link.png" />
     <Content Include="Images\Nav\Movie_Over.png" />
+    <Content Include="Images\Nav\store_link.png" />
+    <Content Include="Images\Nav\store_over.png" />
     <Content Include="Images\Nav\Writing_Link.png" />
     <Content Include="Images\Nav\Writing_Over.png" />
     <Content Include="Images\Quotes\Dante_Inferno.png" />
