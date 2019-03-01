@@ -216,6 +216,8 @@
     <Content Include="Images\MovieReviews.png" />
     <Content Include="Images\Nav\About_Link.png" />
     <Content Include="Images\Nav\About_over.png" />
+    <Content Include="Images\Nav\Art_link.png" />
+    <Content Include="Images\Nav\art_over.png" />
     <Content Include="Images\Nav\Convention_Link.png" />
     <Content Include="Images\Nav\Convention_Over.png" />
     <Content Include="Images\Nav\Gaming_Link.png" />
