@@ -3,7 +3,14 @@
     font-family: 'The Macabre';
     src: url('The Macabre.otf') format('opentype');
 }
-
+@font-face {
+    font-family: 'GULAGDECAY';
+    src: url('GULAGDECAY.TTF') format('truetype');
+}
+@font-face {
+    font-family: 'BURGOS CITY';
+    src: url('BURGOS CITY.OTF') format('opentype');
+}
 
 body {
     padding-top: 50px;
@@ -64,8 +71,29 @@ textarea {
 .ReviewdDateColumn {
     width: 250px;
 }
+/*  End Review Table*/
 
-
+/*  Review  */
+.Review-Movie-TItle {
+    color: red;
+    font-size: 28pt;
+    font-family: GULAGDECAY;
+}
+.Review-Review-TItle {
+    color: whitesmoke;
+    font-size: 18pt;
+    font-family: GULAGDECAY;
+}
+.Review-Review {
+    color: whitesmoke;
+    font-size: 14ptpt;
+    font-family: Arial;
+}
+.Review-Reviewer {
+    color: red;
+    font-size: 18pt;
+    font-family: GULAGDECAY;
+}
 
 
 
