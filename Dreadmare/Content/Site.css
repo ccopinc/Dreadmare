@@ -41,7 +41,9 @@ textarea {
     text-align: center;
     padding-top: 10px;
 }
-.MovieTitle{}
+.MovieTitle{
+    color: whitesmoke;
+}
 .MovieTitle:hover {
    color: maroon;
 }

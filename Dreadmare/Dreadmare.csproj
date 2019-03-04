@@ -219,6 +219,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Close.png" />
     <Content Include="Images\MovieReviews.png" />
     <Content Include="Images\Nav\About_Link.png" />
     <Content Include="Images\Nav\About_over.png" />
@@ -275,6 +276,7 @@
     <Content Include="Views\Shared\_Layout1.cshtml" />
     <Content Include="Views\Movie\GetReviews.cshtml" />
     <Content Include="Views\Main\GetQuote.cshtml" />
+    <Content Include="Views\Movie\ReviewDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

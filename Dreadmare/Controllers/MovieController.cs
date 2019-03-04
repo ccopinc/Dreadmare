@@ -26,7 +26,15 @@ namespace Dreadmare.Controllers
             return View(reviews);
         }
 
-       
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/Movie/ReviewDetails/{id}")]
+        public ActionResult ReviewDetails(int id)
+        {
+            var review = movieManager.GetReviewById(id);
+            return PartialView("ReviewDetails", review);
+        }
+
+
 
     }
 }

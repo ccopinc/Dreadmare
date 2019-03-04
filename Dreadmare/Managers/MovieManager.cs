@@ -50,6 +50,28 @@ namespace Dreadmare.Managers
 
         }
 
+        public GetReviews GetReviewById(int id)
+        {
+            var dbReview = db.movie_Review.Where(r => r.id_Review == id).FirstOrDefault();
+            GetReviews review = new GetReviews()
+            {
+                Reviewer = GetReviewer(dbReview.id_Reviewer).FirstName,
+                ReviewTitle = dbReview.ReviewTitle,
+                MovieTitle = dbReview.MovieTitle,
+                SoundPoints = dbReview.SoundPoints,
+                TotalPoints = dbReview.TotalScore,
+                ActingPoints = dbReview.ActingPoints,
+                OverAllPoints = dbReview.OverAllPoints,
+                EffectsPoints = dbReview.EffectsPoints,
+                ScriptPoints = dbReview.ScriptPoints,
+                Review = dbReview.Review
+            };
+            // short date
+            DateTime d = dbReview.ReviewDate.Value;
+            review.ReviewDate = d.ToShortDateString();
+            return review;
+        }
+
         public up_movie_GetReviewerInfo_Result GetReviewer(int id)
         {
             string name = "";
