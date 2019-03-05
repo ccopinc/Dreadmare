@@ -75,7 +75,7 @@ textarea {
 
 /*  Review  */
 .Review-Movie-TItle {
-    color: red;
+    color: maroon;
     font-size: 28pt;
     font-family: Burgos City;
 }
@@ -89,11 +89,15 @@ textarea {
     font-size: 14pt;
     font-family: Arial;
 }
-.Review-Reviewer {
-    color: red;
-    font-size: 18pt;
-    font-family: Burgos City;
+
+.movie-plot {
+    width: 800px;
+    color: whitesmoke;
+    font-size: 12pt;
+    font-family: Arial;
 }
+
+
 
 
 

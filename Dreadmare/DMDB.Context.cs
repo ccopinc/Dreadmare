@@ -32,6 +32,7 @@ namespace Dreadmare
         public virtual DbSet<movie_Review> movie_Review { get; set; }
         public virtual DbSet<quote_Quote> quote_Quote { get; set; }
         public virtual DbSet<writing_Writing> writing_Writing { get; set; }
+        public virtual DbSet<movie_Details> movie_Details { get; set; }
     
         public virtual ObjectResult<up_movie_GetReviewerInfo_Result> up_movie_GetReviewerInfo(Nullable<int> id)
         {

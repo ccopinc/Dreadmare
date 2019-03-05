@@ -176,7 +176,9 @@
     </Compile>
     <Compile Include="DTOModels\GetReviews.cs" />
     <Compile Include="DTOModels\Infrastructure\MapperBase.cs" />
+    <Compile Include="DTOModels\MovieDetails.cs" />
     <Compile Include="DTOModels\Quotes.cs" />
+    <Compile Include="DTOModels\ReviewDetails.cs" />
     <Compile Include="DTOModels\ReviewsViewModel.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -184,6 +186,9 @@
     <Compile Include="Managers\MovieManager.cs" />
     <Compile Include="Managers\SiteManager.cs" />
     <Compile Include="MappingProfile.cs" />
+    <Compile Include="movie_Details.cs">
+      <DependentUpon>DMDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="movie_News.cs">
       <DependentUpon>DMDB.tt</DependentUpon>
     </Compile>

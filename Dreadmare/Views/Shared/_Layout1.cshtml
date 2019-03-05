@@ -5,15 +5,7 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script type="text/javascript" src="../../Scripts/ddaccordion.js">
-
-        /***********************************************
-        * Accordion Content script- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
-        * Visit http://www.dynamicDrive.com for hundreds of DHTML scripts
-        * Please keep this notice intact
-        ***********************************************/
-
-    </script>
+    <script type="text/javascript" src="../../Scripts/ddaccordion.js"></script>
 
     <script type="text/javascript">
         ddaccordion.init({
@@ -39,6 +31,20 @@
 
     </script>
     <style type="text/css">
+        .Review-Reviewer {
+            color: maroon;
+            font-size: 16pt;
+            font-family: Burgos City;
+        }
+        .spacer-25 {
+            height: 25px;
+        }
+        .details-header {
+            color: Maroon;
+            font-size: 12pt;
+            font-family: Arial;
+            font-weight: bold;
+        }
         /*MENU STUFF*/
         .menu-home {
             height: 50px;
@@ -47,9 +53,9 @@
             display: block;
         }
 
-            .menu-home:hover {
-                background: url('../Images/Nav/Home_Over.png');
-            }
+        .menu-home:hover {
+            background: url('../Images/Nav/Home_Over.png');
+        }
 
         .menu-movie {
             height: 50px;
@@ -58,9 +64,9 @@
             display: block;
         }
 
-            .menu-movie:hover {
-                background: url('../Images/Nav/movie_Over.png');
-            }
+        .menu-movie:hover {
+            background: url('../Images/Nav/movie_Over.png');
+        }
 
         .menu-writing {
             height: 50px;
@@ -69,9 +75,9 @@
             display: block;
         }
 
-            .menu-writing:hover {
-                background: url('../Images/Nav/writing_Over.png');
-            }
+        .menu-writing:hover {
+            background: url('../Images/Nav/writing_Over.png');
+        }
 
         .menu-gaming {
             height: 50px;
@@ -80,9 +86,9 @@
             display: block;
         }
 
-            .menu-gaming:hover {
-                background: url('../Images/Nav/gaming_Over.png');
-            }
+        .menu-gaming:hover {
+            background: url('../Images/Nav/gaming_Over.png');
+        }
 
         .menu-about {
             height: 50px;
@@ -91,9 +97,9 @@
             display: block;
         }
 
-            .menu-about:hover {
-                background: url('../Images/Nav/about_Over.png');
-            }
+        .menu-about:hover {
+            background: url('../Images/Nav/about_Over.png');
+        }
 
         .menu-convention {
             height: 50px;
@@ -102,9 +108,9 @@
             display: block;
         }
 
-            .menu-convention:hover {
-                background: url('../Images/Nav/convention_Over.png');
-            }
+        .menu-convention:hover {
+            background: url('../Images/Nav/convention_Over.png');
+        }
 
         .menu-art {
             height: 50px;
@@ -113,9 +119,9 @@
             display: block;
         }
 
-            .menu-art:hover {
-                background: url('../Images/Nav/art_Over.png');
-            }
+        .menu-art:hover {
+            background: url('../Images/Nav/art_Over.png');
+        }
 
         .menu-store {
             height: 50px;
@@ -124,9 +130,9 @@
             display: block;
         }
 
-            .menu-store:hover {
-                background: url('../Images/Nav/store_Over.png');
-            }
+        .menu-store:hover {
+            background: url('../Images/Nav/store_Over.png');
+        }
 
         /*     END OF MENU STUFF     */
 
@@ -147,46 +153,46 @@
             width: 230px; /*width of menu*/
         }
 
-            .urbangreymenu .headerbar {
-                margin-bottom: 0; /*bottom spacing between header and rest of content*/
-                text-transform: uppercase;
-            }
+        .urbangreymenu .headerbar {
+            margin-bottom: 0; /*bottom spacing between header and rest of content*/
+            text-transform: uppercase;
+        }
 
-                .urbangreymenu .headerbar a {
-                    text-decoration: none;
-                    display: block;
-                }
+        .urbangreymenu .headerbar a {
+            text-decoration: none;
+            display: block;
+        }
 
-            .urbangreymenu ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                margin-bottom: 0; /*bottom spacing between each UL and rest of content*/
-            }
+        .urbangreymenu ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-bottom: 0; /*bottom spacing between each UL and rest of content*/
+        }
 
-                .urbangreymenu ul li {
-                    padding-bottom: 2px; /*bottom spacing between menu items*/
-                }
+        .urbangreymenu ul li {
+            padding-bottom: 2px; /*bottom spacing between menu items*/
+        }
 
-                    .urbangreymenu ul li a {
-                        font: normal 28px The Macabre;
-                        color: white;
-                        background: black;
-                        display: block;
-                        padding: 5px 0;
-                        line-height: 17px;
-                        padding-left: 35px; /*link text is indented 8px*/
-                        text-decoration: none;
-                    }
+        .urbangreymenu ul li a {
+            font: normal 28px The Macabre;
+            color: white;
+            background: black;
+            display: block;
+            padding: 5px 0;
+            line-height: 17px;
+            padding-left: 35px; /*link text is indented 8px*/
+            text-decoration: none;
+        }
 
-                        .urbangreymenu ul li a:visited {
-                            color: white;
-                        }
+        .urbangreymenu ul li a:visited {
+            color: white;
+        }
 
-                        .urbangreymenu ul li a:hover { /*hover state CSS*/
-                            color: maroon;
-                            background: black;
-                        }
+        .urbangreymenu ul li a:hover { /*hover state CSS*/
+            color: maroon;
+            background: black;
+        }
     </style>
     @RenderSection("head", required: false)
 </head>

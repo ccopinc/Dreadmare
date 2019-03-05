@@ -59,6 +59,7 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="InsertScripts" />
+    <Folder Include="Procedures" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\core_User.sql" />
@@ -66,7 +67,8 @@
     <Build Include="Tables\movie_Review.sql" />
     <Build Include="Tables\quote_Quote.sql" />
     <Build Include="Tables\writing_Writing.sql" />
-    <Build Include="up_movie_GetReviewerInfo.sql" />
+    <Build Include="Tables\movie_Details.sql" />
+    <Build Include="Procedures\up_movie_GetReviewerInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="InsertScripts\InsertData.sql" />

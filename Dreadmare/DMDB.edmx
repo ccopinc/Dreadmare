@@ -20,6 +20,36 @@
           <Property Name="SnapChat" Type="nvarchar" MaxLength="100" />
           <Property Name="SecLevel" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="movie_Details">
+          <Key>
+            <PropertyRef Name="IMDBID" />
+          </Key>
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Year" Type="int" />
+          <Property Name="Rated" Type="nvarchar" MaxLength="10" />
+          <Property Name="Released" Type="nvarchar" MaxLength="50" />
+          <Property Name="Runtime" Type="nchar" MaxLength="10" />
+          <Property Name="Genre" Type="nvarchar" MaxLength="50" />
+          <Property Name="Director" Type="nvarchar" MaxLength="100" />
+          <Property Name="Writer" Type="nvarchar" MaxLength="100" />
+          <Property Name="Actors" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Plot" Type="nvarchar(max)" />
+          <Property Name="Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Awards" Type="nvarchar" MaxLength="50" />
+          <Property Name="Poster" Type="nvarchar" MaxLength="250" />
+          <Property Name="Ratings" Type="nvarchar" MaxLength="500" />
+          <Property Name="Metascore" Type="nvarchar" MaxLength="50" />
+          <Property Name="IMDBRating" Type="nvarchar" MaxLength="10" />
+          <Property Name="IMDBVotes" Type="nvarchar" MaxLength="15" />
+          <Property Name="IMDBID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="DVD" Type="nvarchar" MaxLength="50" />
+          <Property Name="BoxOffice" Type="nvarchar" MaxLength="50" />
+          <Property Name="Production" Type="nvarchar" MaxLength="100" />
+          <Property Name="Website" Type="nvarchar" MaxLength="100" />
+          <Property Name="Response" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="movie_News">
           <Key>
             <PropertyRef Name="id_MovieNews" />
@@ -73,6 +103,7 @@
         </Function>
         <EntityContainer Name="dm_dbModelStoreContainer">
           <EntitySet Name="core_User" EntityType="Self.core_User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="movie_Details" EntityType="Self.movie_Details" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="movie_News" EntityType="Self.movie_News" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="movie_Review" EntityType="Self.movie_Review" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="quote_Quote" EntityType="Self.quote_Quote" Schema="dbo" store:Type="Tables" />
@@ -89,8 +120,9 @@
           <EntitySet Name="quote_Quote" EntityType="dm_dbModel.quote_Quote" />
           <EntitySet Name="writing_Writing" EntityType="dm_dbModel.writing_Writing" />
           <FunctionImport Name="up_movie_GetReviewerInfo" ReturnType="Collection(dm_dbModel.up_movie_GetReviewerInfo_Result)">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="movie_Details" EntityType="dm_dbModel.movie_Details" />
         </EntityContainer>
         <EntityType Name="core_User">
           <Key>
@@ -159,6 +191,36 @@
           <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="Reviews" Nullable="true" />
         </ComplexType>
+        <EntityType Name="movie_Details">
+          <Key>
+            <PropertyRef Name="IMDBID" />
+          </Key>
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int32" />
+          <Property Name="Rated" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Released" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Runtime" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Director" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Writer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Actors" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Awards" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Poster" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Ratings" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Metascore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IMDBRating" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IMDBVotes" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="IMDBID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DVD" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BoxOffice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Production" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Response" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -241,6 +303,37 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="movie_Details">
+            <EntityTypeMapping TypeName="dm_dbModel.movie_Details">
+              <MappingFragment StoreEntitySet="movie_Details">
+                <ScalarProperty Name="Response" ColumnName="Response" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="Production" ColumnName="Production" />
+                <ScalarProperty Name="BoxOffice" ColumnName="BoxOffice" />
+                <ScalarProperty Name="DVD" ColumnName="DVD" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="IMDBID" ColumnName="IMDBID" />
+                <ScalarProperty Name="IMDBVotes" ColumnName="IMDBVotes" />
+                <ScalarProperty Name="IMDBRating" ColumnName="IMDBRating" />
+                <ScalarProperty Name="Metascore" ColumnName="Metascore" />
+                <ScalarProperty Name="Ratings" ColumnName="Ratings" />
+                <ScalarProperty Name="Poster" ColumnName="Poster" />
+                <ScalarProperty Name="Awards" ColumnName="Awards" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Plot" ColumnName="Plot" />
+                <ScalarProperty Name="Actors" ColumnName="Actors" />
+                <ScalarProperty Name="Writer" ColumnName="Writer" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="Runtime" ColumnName="Runtime" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="Rated" ColumnName="Rated" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
