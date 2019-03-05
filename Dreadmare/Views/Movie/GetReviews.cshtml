@@ -8,11 +8,13 @@
 
 
 
-<div id="PageTitle" style="position: absolute; top: 150px; left: 250px; ">
+<div id="PageTitle" style="position: absolute; top: 150px; left: 230px; ">
     <img src="~/Images/MovieReviews.png" />
 </div>
-<table cellpadding='0' cellspacing='0' style="width: 900px;padding-left: 100px; position: absolute; top: 320px;">
-
+<div style="padding-bottom: 10px;position: absolute; top: 240px; left: 360px;">
+    <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names.." id="myInput" onkeyup="myFunction()">
+</div>
+<table id="reviewTable" cellpadding='0' cellspacing='0' style="width: 900px;padding-left: 100px; position: absolute; top: 300px;">
     <tr>
         <td class="HeaderRow TitleColumn">Movie Title</td>
         <td class="HeaderRow ">Rating</td>
@@ -64,5 +66,24 @@
         
     };
 
-
+</script>
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("reviewTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
 </script>
