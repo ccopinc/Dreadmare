@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 using System.Data.Entity.Migrations.Model;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Dreadmare.Managers
 
         public ReviewsViewModel GetMovieReviewList()
         {
-            var lmr = db.movie_Review.ToList();
+            var lmr = db.movie_Review.OrderBy(r => r.MovieTitle).ToList();
             List<GetReviews>reviews = new List<GetReviews>();
             var list = AutoMapper.Mapper.Map(lmr, reviews);
             foreach(movie_Review mr in lmr)
@@ -119,7 +120,11 @@ namespace Dreadmare.Managers
                     Poster =m.Poster
                 };
                db.movie_Details.AddOrUpdate(dbMovie);
-               db.SaveChanges();
+                var er = db.GetValidationErrors();
+                db.SaveChanges();
+                
+
+
 
                 review.Movie = new MovieDetails()
                 {

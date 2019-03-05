@@ -31,7 +31,7 @@
           <Property Name="Runtime" Type="nchar" MaxLength="10" />
           <Property Name="Genre" Type="nvarchar" MaxLength="50" />
           <Property Name="Director" Type="nvarchar" MaxLength="100" />
-          <Property Name="Writer" Type="nvarchar" MaxLength="100" />
+          <Property Name="Writer" Type="nvarchar" MaxLength="500" />
           <Property Name="Actors" Type="nvarchar" MaxLength="1000" />
           <Property Name="Plot" Type="nvarchar(max)" />
           <Property Name="Language" Type="nvarchar" MaxLength="50" />
@@ -202,7 +202,7 @@
           <Property Name="Runtime" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Genre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Director" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Writer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Writer" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Actors" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Plot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
