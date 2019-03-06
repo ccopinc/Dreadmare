@@ -11,16 +11,19 @@
 <div id="PageTitle" style="position: absolute; top: 150px; left: 230px; ">
     <img src="~/Images/MovieReviews.png" />
 </div>
-<div style="padding-bottom: 10px;position: absolute; top: 240px; left: 360px;">
-    <input class="w3-input w3-border w3-padding" type="text" placeholder="Search for names.." id="myInput" onkeyup="myFunction()">
+<div style="padding-bottom: 10px;position: absolute; top: 240px; left: 340px;">
+    <input class="w3-input w3-border w3-padding" style="height: 20px;  background-color: black; color: silver;" type="text" placeholder="Search for names.." id="myInput" onkeyup="myFunction()">
 </div>
-<table id="reviewTable" cellpadding='0' cellspacing='0' style="width: 900px;padding-left: 100px; position: absolute; top: 300px;">
+<table cellpadding='0' cellspacing='0' style="width: 900px;padding-left: 100px; position: absolute; top: 280px;">
     <tr>
         <td class="HeaderRow TitleColumn">Movie Title</td>
         <td class="HeaderRow ">Rating</td>
         <td class="HeaderRow ReviewdDateColumn">Review Date</td>
         <td class="HeaderRow ReviewdByColumn">Reviewed By</td>
     </tr>
+</table>
+<table id="reviewTable" cellpadding='0' cellspacing='0' style="width: 900px;padding-left: 100px; position: absolute; top: 310px;">
+
     @if (Model != null)
     {
         foreach (var movie in Model.Reviews)
@@ -35,17 +38,33 @@
     }
 </table>
 <div id="review" class="w3-modal" style="background-color: black;">
+    <span onclick="document.getElementById('review').style.display = 'none'" class="w3-button w3-display-topright">
+        <img src="~/Images/Close.png" />
+    </span>
     <div class="w3-modal-content w3-animate-opacity" style="background-color: black;">
         <div class="w3-container" style="background-color: black;">
-            <span onclick="document.getElementById('review').style.display = 'none'" class="w3-button w3-display-topright">
-                <img src="~/Images/Close.png" />
-            </span>
+
             <div id="reviewView" style="background-color: black;"></div>
         </div>
     </div>
 </div>
 
-
+<script type="text/javascript">
+    function viewDetails(id) {
+        var x = document.getElementById(id);
+        if (x.className.indexOf("w3-show") == -1) {
+            x.className += " w3-show";
+        } else {
+            x.className = x.className.replace(" w3-show", "");
+        }
+        var but = document.getElementById("showDetails");
+        if (but.innerText === "Show Movie Details") {
+            but.innerText = "Hide Movie Details";
+        } else {
+            but.innerText = "Show Movie Details";
+        }
+    }
+</script>
 <script type="text/javascript">
     function LoadDetails(id) {
         $.ajax({
@@ -86,4 +105,5 @@
             }
         }
     }
+    
 </script>
