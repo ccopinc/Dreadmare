@@ -6,36 +6,40 @@
 }
 
 <h2>WriteReview</h2>
-<div>Search for movie to review<input id ="searchText" type="text" placeholder="Enter at least 3 letters"/><button onclick="MovieSearch()" type="button">Search</button></div>
-
+<div>Search for movie to review<input onkeypress="MovieSearch()" id ="searchText" type="text" placeholder="Enter at least 5 letters"/><button onclick="MovieSearch()" type="button">Search</button></div>
+<div style="height: 200px; overflow: scroll;">
+    <table id="ChooseMovie"></table>
+</div>
 <script>
     function MovieSearch() {
         var search = document.getElementById("searchText");
-        if (search.value.length < 3) {
-            alert("Please enter at least 3 letters of the Movie Title");
+        if (search.value.length < 4) {
+            //alert("Please enter at least 3 letters of the Movie Title");
             return;
         }
-        //var results;
+        var results;
         var r;
-        //$.ajax({
+        $.ajax({
 
-        //    url: 'http://www.omdbapi.com/?s=' + search.value + '*&apikey=c1eac364',
-        //    type : 'GET',
+            url: 'http://www.omdbapi.com/?s=' + search.value + '*&apikey=c1eac364',
+            type : 'GET',
 
-        //    dataType:'json',
-        //    success: function (data) {
-        //        var n = data.Search.length;
+            dataType:'json',
+            success: function (data) {
+                var n = data.Search.length;
                 
-        //        for (i = 0; i < n; i++) { 
-        //            //var results = JSON.parse();
-        //            r = r + "<br>" + JSON.parse(data.Search[i]).toString() ;
-        //        }
-        //        alert(r);
-        //    },
-        //    error : function(request,error)
-        //    {
-        //        alert("Request: "+JSON.stringify(request));
-        //    }
-        //});
+                for (i = 0; i < n; i++) { 
+                    var s = JSON.stringify(data.Search[i]);
+                    var res = JSON.parse(s);
+                    $('#ChooseMovie').append('<tr><td>' + res.Title + '</td></tr>');
+                    
+                }
+                //alert(r);
+            },
+            error : function(request,error)
+            {
+                alert("Request: "+JSON.stringify(request));
+            }
+        });
     }
 </script>
