@@ -1,0 +1,41 @@
+﻿@model Dreadmare.DTOModels.GetReviews
+
+@{
+    ViewBag.Title = "WriteReview";
+    Layout = "~/Views/Shared/_Layout1.cshtml";
+}
+
+<h2>WriteReview</h2>
+<div>Search for movie to review<input id ="searchText" type="text" placeholder="Enter at least 3 letters"/><button onclick="MovieSearch()" type="button">Search</button></div>
+
+<script>
+    function MovieSearch() {
+        var search = document.getElementById("searchText");
+        if (search.value.length < 3) {
+            alert("Please enter at least 3 letters of the Movie Title");
+            return;
+        }
+        //var results;
+        var r;
+        //$.ajax({
+
+        //    url: 'http://www.omdbapi.com/?s=' + search.value + '*&apikey=c1eac364',
+        //    type : 'GET',
+
+        //    dataType:'json',
+        //    success: function (data) {
+        //        var n = data.Search.length;
+                
+        //        for (i = 0; i < n; i++) { 
+        //            //var results = JSON.parse();
+        //            r = r + "<br>" + JSON.parse(data.Search[i]).toString() ;
+        //        }
+        //        alert(r);
+        //    },
+        //    error : function(request,error)
+        //    {
+        //        alert("Request: "+JSON.stringify(request));
+        //    }
+        //});
+    }
+</script>

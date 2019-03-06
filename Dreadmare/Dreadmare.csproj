@@ -328,6 +328,7 @@
     <Content Include="Views\Movie\GetReviews.cshtml" />
     <Content Include="Views\Main\GetQuote.cshtml" />
     <Content Include="Views\Movie\ReviewDetails.cshtml" />
+    <Content Include="Views\Movie\WriteReview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

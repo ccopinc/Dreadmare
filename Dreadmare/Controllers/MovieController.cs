@@ -34,6 +34,14 @@ namespace Dreadmare.Controllers
             return PartialView("ReviewDetails", review);
         }
 
+        [System.Web.Http.HttpPost]
+        [System.Web.Http.Route("api/Movie/WriteReview/")]
+        public ActionResult WriteReview(GetReviews review)
+        {
+           
+            return View(review);
+        }
+
 
 
     }
