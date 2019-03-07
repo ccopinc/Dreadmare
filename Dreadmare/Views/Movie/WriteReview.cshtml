@@ -39,7 +39,7 @@
                     var count = dd.totalResults;
                     pages = Math.ceil(count / n);
                     var res = JSON.parse(s);
-                    $('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + res.Title + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
+                    $('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + escape(res.Title) + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
                     //$('#ChooseMovie').append('<tr class="movieRow"><td>' + res.Title + ' (' + res.Year  +')' + '</td></tr>');
                 }
             },
@@ -56,7 +56,7 @@
             url: '/Movie/SetMovieObject/' + send,
             type: 'GET',
             success: function (data) {
-                
+                location.reload(true);
             },
             error: function (request, error) {
                 alert("Request: " + JSON.stringify(request));
@@ -91,13 +91,13 @@
         <tr>
             <td>@Html.LabelFor(Model => Model.IMDBID)</td>
             <td colspan="3" style="color: black;">
-                @Html.TextBoxFor(Model => Model.IMDBID)
+                @Html.EditorFor(Model => Model.IMDBID)
             </td>
         </tr>
         <tr>
             <td>@Html.LabelFor(Model => Model.MovieTitle)</td>
             <td colspan="3" style="color: black;">
-                @Html.TextBoxFor(model => Model.MovieTitle)
+                @Html.TextBoxFor(model => Model.MovieTitle, new { htmlAttributes = new { @class = "form-control" } }))
             </td>
         </tr>
         <tr>
