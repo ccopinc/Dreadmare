@@ -1,4 +1,73 @@
-﻿@model Dreadmare.DTOModels.GetReviews
+﻿<script type="text/javascript">
+    function clearTable() {
+        $("#ChooseMovie").children().remove();
+    }
+
+    function MovieSearch() {
+        var search = document.getElementById("searchText");
+        if (search.value.length < 5) {
+            //alert("Please enter at least 5 letters of the Movie Title");
+            return;
+        }
+
+        clearTable();
+
+        var pages = 1;
+        if (pages === 1) {
+            pages = callData(search.value, pages);
+        }
+
+        if (pages > 1) {
+            for (var p = 2; p < pages + 1; p++) {
+                callData(search.value, p);
+            }
+        }
+    }
+    function callData(txt, p) {
+        $.ajax({
+            url: 'http://www.omdbapi.com/?s=' + txt + '*&apikey=c1eac364&page=' + p,
+            type: 'GET',
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var n = data.Search.length;
+
+                for (i = 0; i < n; i++) {
+                    var d = JSON.stringify(data);
+                    var dd = JSON.parse(d);
+                    var s = JSON.stringify(data.Search[i]);
+                    var count = dd.totalResults;
+                    pages = Math.ceil(count / n);
+                    var res = JSON.parse(s);
+                    $('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + res.Title + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
+                    //$('#ChooseMovie').append('<tr class="movieRow"><td>' + res.Title + ' (' + res.Year  +')' + '</td></tr>');
+                }
+            },
+            error: function (request, error) {
+                alert("Request: " + JSON.stringify(request));
+            }
+        });
+        return pages;
+    }
+
+    function selectMovie(name, id) {
+        var send = name + "|" + id;
+        $.ajax({
+            url: '/Movie/SetMovieObject/' + send,
+            type: 'GET',
+            success: function (data) {
+                
+            },
+            error: function (request, error) {
+                alert("Request: " + JSON.stringify(request));
+            }
+        });
+        clearTable();
+    }
+
+
+</script>
+@model Dreadmare.DTOModels.GetReviews
 
 @{
     ViewBag.Title = "WriteReview";
@@ -6,40 +75,41 @@
 }
 
 <h2>WriteReview</h2>
-<div>Search for movie to review<input onkeypress="MovieSearch()" id ="searchText" type="text" placeholder="Enter at least 5 letters"/><button onclick="MovieSearch()" type="button">Search</button></div>
-<div style="width: 250px;height: 200px; overflow: scroll;overflow-x: hidden;">
-    <table id="ChooseMovie"></table>
+<div>
+    Search for movie to review<input id="searchText" onkeyup="MovieSearch()" type="text" placeholder="Enter at least 5 letters" />
+    <button  type="button">Search</button>
+    <button onclick="clearTable()" type="button">Clear</button>
 </div>
-<script>
-    function MovieSearch() {
-        var search = document.getElementById("searchText");
-        if (search.value.length < 4) {
-            //alert("Please enter at least 3 letters of the Movie Title");
-            return;
-        }
-        var results;
-        var r;
-        $.ajax({
-
-            url: 'http://www.omdbapi.com/?s=' + search.value + '*&apikey=c1eac364',
-            type : 'GET',
-
-            dataType:'json',
-            success: function (data) {
-                var n = data.Search.length;
-                
-                for (i = 0; i < n; i++) { 
-                    var s = JSON.stringify(data.Search[i]);
-                    var res = JSON.parse(s);
-                    $('#ChooseMovie').append('<tr><td>' + res.Title + '</td></tr>');
-                    
-                }
-                //alert(r);
-            },
-            error : function(request,error)
-            {
-                alert("Request: "+JSON.stringify(request));
-            }
-        });
-    }
-</script>
+<div style="width: 250px;height: 200px; overflow: scroll;overflow-x: hidden;">
+    <table style="width: 800px;" id="ChooseMovie"></table>
+</div>
+<div class="spacer-25"></div>
+@using (Html.BeginForm())
+{
+    <fieldset>
+    <table style="font-size: 16pt; width: 800">
+        <tr>
+            <td>@Html.LabelFor(Model => Model.IMDBID)</td>
+            <td colspan="3" style="color: black;">
+                @Html.TextBoxFor(Model => Model.IMDBID)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(Model => Model.MovieTitle)</td>
+            <td colspan="3" style="color: black;">
+                @Html.TextBoxFor(model => Model.MovieTitle)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Reviewer)</td>
+            <td colspan="3">
+                @Html.TextBoxFor(Model => Model.Reviewer)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(Model => Model.Review)</td>
+            <td colspan="3"><textarea id="review"></textarea></td>
+        </tr>
+    </table>
+    </fieldset>
+}

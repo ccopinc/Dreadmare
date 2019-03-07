@@ -43,6 +43,23 @@ namespace Dreadmare.Controllers
         }
 
 
+        [System.Web.Http.HttpGet]
+        [System.Web.Http.Route("api/Movie/SetMovieObject/{id}")]
+        public ActionResult SetMovieObject(string id)
+        {
+            var data = id.Split('|');
+            GetReviews review = new GetReviews()
+            {
+                MovieTitle = data[0],
+                IMDBID = data[1]
+            };
+
+            return View("WriteReview", review);
+        }
+
+
+
+
 
     }
 }

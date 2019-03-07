@@ -245,6 +245,7 @@
     <Content Include="Images\Quotes\Dante_Inferno.png" />
     <Content Include="Images\Quotes\Dracula_Bram_Stoker.png" />
     <Content Include="Images\Quotes\Hellraiser_Lead_Cenobite.png" />
+    <Content Include="Images\Quotes\Shakespeare.png" />
     <Content Include="Images\ReviewHeader.gif" />
     <Content Include="Images\skull.png" />
     <Content Include="Images\Title.png" />
