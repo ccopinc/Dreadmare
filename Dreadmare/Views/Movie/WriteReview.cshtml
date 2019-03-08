@@ -8,10 +8,15 @@
         movies.length = 0;
     }
 
-    function MovieSearch() {
+    function MovieSearch(isButClick) {
+        var rb = document.getElementById("exact").checked;
+        if (isButClick === false && rb===true) {
+            return true;
+        } 
+
         var search = document.getElementById("moviePick");
-        if (search.value.length < 5) {
-            //alert("Please enter at least 5 letters of the Movie Title");
+        if (search.value.length < 3) {
+            
             return;
         }
 
@@ -36,33 +41,50 @@
 
     }
     function callData(txt, p) {
+        var rb = document.getElementById("exact").checked;
+        if (document.getElementById("exact").checked) {
+            txt = 't=' + txt;
+        } else {
+                txt = 's=' + txt + '*';
+        }
+
         $.ajax({
-            url: 'http://www.omdbapi.com/?s=' + txt + '*&apikey=c1eac364&page=' + p + '&type=movie',
+            url: 'http://www.omdbapi.com/?' + txt + '&apikey=c1eac364&page=' + p,
             type: 'GET',
             async: false,
             dataType: 'json',
             success: function (data) {
-                var n = data.Search.length;
+                if (rb == false) {
+                    var n = data.Search.length;
+                    for (i = 0; i < n; i++) {
+                        var d = JSON.stringify(data);
+                        var dd = JSON.parse(d);
+                        var s = JSON.stringify(data.Search[i]);
+                        count = dd.totalResults;
+                        var fc = document.getElementById("foundCount");
+                        pages = Math.ceil(count / n);
+                        if (pages > 5) {
+                            fc.innerText = count +
+                                " records have been found.  Please enter more characters to narrow search.";
+                            return;
+                        } else {
+                            fc.innerText = count + " records have been found";
+                        }
 
-                for (i = 0; i < n; i++) {
+                        var res = JSON.parse(s);
+
+                        movies.push(res.Title + ' (' + res.Year + ')');
+                        //$('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + escape(res.Title) + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
+                        //$('#ChooseMovie').append('<tr class="movieRow"><td>' + res.Title + ' (' + res.Year  +')' + '</td></tr>');
+                    }
+                } else {
                     var d = JSON.stringify(data);
                     var dd = JSON.parse(d);
-                    var s = JSON.stringify(data.Search[i]);
-                    count = dd.totalResults;
-                    var fc = document.getElementById("foundCount");
-                    pages = Math.ceil(count / n);
-                    if (pages > 5) {
-                        fc.innerText = count + " records have been found.  Please enter more characters to narrow search.";
-                        return;
-                    } else {
-                        fc.innerText = count + " records have been found";
-                        }
-                    
-                    var res = JSON.parse(s);
-
-                    movies.push(res.Title + ' (' + res.Year + ')');
-                    //$('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + escape(res.Title) + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
-                    //$('#ChooseMovie').append('<tr class="movieRow"><td>' + res.Title + ' (' + res.Year  +')' + '</td></tr>');
+                    pages = 1;
+                    movies.push('');
+                    movies.push(dd.Title + ' (' + dd.Year + ')');
+                    var rsec = document.getElementById("reviewSection");
+                    resc.style.display="block;"
                 }
             },
             error: function (request, error) {
@@ -89,6 +111,23 @@
     }
 
 
+    function showButton() {
+        var but = document.getElementById("searchButton");
+        but.style.display = 'inline-block';
+    }
+    function hideButton() {
+        var but = document.getElementById("searchButton");
+        but.style.display = 'none';
+    }
+
+    function showRSec() {
+         
+        if (document.getElementById("moviePick").value.length > 3) {
+            document.getElementById("reviewSection").style.display = "block";
+            }
+
+    }
+
 </script>
 @model Dreadmare.DTOModels.GetReviews
 
@@ -100,38 +139,43 @@
 <h2>WriteReview</h2>
 <div>
     <div class="ui-widget">
-        <span style="color: red;" id="foundCount"></span><br/>
-        <label for="moviePick">Search for Movie</label>
-        <input placeholder="Type at least 6 characters " onkeyup="MovieSearch()" id="moviePick">
+        <label for="moviePick">Search for Movie</label><br />
+        <input type="radio" value="exact" onclick="showButton()" id="exact" name="rSelect"  /><label for="exact">Search for this exact title</label><br />
+        <input type="radio" checked id="any" value="any" name="rSelect" /><label for="any">Search starts with this text</label><br />
+        <input placeholder="Type at least 3 characters" onclick="showRSec()" onkeyup="MovieSearch(false)" id="moviePick" style="width: 400px;">
+        <button id="searchButton" class="w3-button w3-red" style="display: none;" onclick="MovieSearch(true)">Search</button>
+        <span style="color: red;" id="foundCount"></span>
     </div></div>
 
 <div class="spacer-25"></div>
 @using (Html.BeginForm())
 {
-    <fieldset>
-    <table style="font-size: 16pt; width: 800">
-        <tr>
-            <td>@Html.LabelFor(Model => Model.IMDBID)</td>
-            <td colspan="3" style="color: black;">
-                @Html.EditorFor(Model => Model.IMDBID)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(Model => Model.MovieTitle)</td>
-            <td colspan="3" style="color: black;">
-                @Html.TextBoxFor(model => Model.MovieTitle, new { htmlAttributes = new { @class = "form-control" } }))
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(Model => Model.Reviewer)</td>
-            <td colspan="3">
-                @Html.TextBoxFor(Model => Model.Reviewer)
-            </td>
-        </tr>
-        <tr>
-            <td>@Html.LabelFor(Model => Model.Review)</td>
-            <td colspan="3"><textarea id="review"></textarea></td>
-        </tr>
-    </table>
-    </fieldset>
+    <div id="reviewSection" style="display: none;">
+        <fieldset>
+            <table style="font-size: 16pt; width: 800">
+                <tr>
+                    <td>@Html.LabelFor(Model => Model.IMDBID)</td>
+                    <td colspan="3" style="color: black;">
+                        @Html.EditorFor(Model => Model.IMDBID)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(Model => Model.MovieTitle)</td>
+                    <td colspan="3" style="color: black;">
+                        @Html.TextBoxFor(model => Model.MovieTitle, new { htmlAttributes = new { @class = "form-control" } }))
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(Model => Model.Reviewer)</td>
+                    <td colspan="3">
+                        @Html.TextBoxFor(Model => Model.Reviewer)
+                    </td>
+                </tr>
+                <tr>
+                    <td>@Html.LabelFor(Model => Model.Review)</td>
+                    <td colspan="3"><textarea id="review"></textarea></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
 }
