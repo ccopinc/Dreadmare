@@ -16,7 +16,7 @@
         } 
 
         var search = document.getElementById("moviePick");
-        if (search.value.length < 3) {
+        if (search.value.length < 5) {
             
             return;
         }
@@ -37,7 +37,7 @@
         //}
 
         $('#moviePick').autocomplete({
-            maxShowItems: 5, // Make list height fit to 5 items when items are over 5.
+            maxShowItems: 10, // Make list height fit to 5 items when items are over 5.
             source: movies
         });
 
@@ -89,8 +89,13 @@
                     pages = 1;
                     movies.push('');
                     movies.push(dd.Title + ' (' + dd.Year + ')');
-                    var rsec = document.getElementById("reviewSection");
-                    resc.style.display="block;"
+                    if (dd.Title.length > 0) {
+                        showRSec();
+                        var fc = document.getElementById("foundCount");
+                        fc.innerText = "Movie found";
+                        fc.style.color = "silver";
+                    }
+                   
                 }
             },
             error: function (request, error) {
@@ -149,7 +154,7 @@
         <input type="radio" value="exact" onclick="showButton()" id="exact" name="rSelect"  /><label for="exact">Search for this exact title</label><br />
         <input type="radio" checked id="any" value="any" name="rSelect" /><label for="any">Search starts with this text</label><br />
         <input placeholder="Type at least 3 characters" onclick="showRSec()" onkeyup="MovieSearch(false)" id="moviePick" style="width: 400px;">
-        <button id="searchButton" class="w3-button w3-red" style="display: none;" onclick="MovieSearch(true)">Search</button>
+        <button id="searchButton" class="w3-button w3-red" style="display: none;" onclick="MovieSearch(true)">Search</button><br/>
         <span style="color: red;" id="foundCount"></span>
     </div></div>
 
