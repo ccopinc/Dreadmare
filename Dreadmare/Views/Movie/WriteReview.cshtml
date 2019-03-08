@@ -1,10 +1,15 @@
-﻿<script type="text/javascript">
+﻿<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+    var movies = [];
+    var count;
     function clearTable() {
-        $("#ChooseMovie").children().remove();
+        movies.length = 0;
     }
 
     function MovieSearch() {
-        var search = document.getElementById("searchText");
+        var search = document.getElementById("moviePick");
         if (search.value.length < 5) {
             //alert("Please enter at least 5 letters of the Movie Title");
             return;
@@ -17,15 +22,22 @@
             pages = callData(search.value, pages);
         }
 
-        if (pages > 1) {
-            for (var p = 2; p < pages + 1; p++) {
-                callData(search.value, p);
+        if (pages < 6) {
+            if (pages > 1) {
+               for (var p = 2; p < pages + 1; p++) {
+                    callData(search.value, p);
+               }
             }
         }
+
+        $("#moviePick" ).autocomplete({
+            source: movies
+        });
+
     }
     function callData(txt, p) {
         $.ajax({
-            url: 'http://www.omdbapi.com/?s=' + txt + '*&apikey=c1eac364&page=' + p,
+            url: 'http://www.omdbapi.com/?s=' + txt + '*&apikey=c1eac364&page=' + p + '&type=movie',
             type: 'GET',
             async: false,
             dataType: 'json',
@@ -36,10 +48,20 @@
                     var d = JSON.stringify(data);
                     var dd = JSON.parse(d);
                     var s = JSON.stringify(data.Search[i]);
-                    var count = dd.totalResults;
+                    count = dd.totalResults;
+                    var fc = document.getElementById("foundCount");
                     pages = Math.ceil(count / n);
+                    if (pages > 5) {
+                        fc.innerText = count + " records have been found.  Please enter more characters to narrow search.";
+                        return;
+                    } else {
+                        fc.innerText = count + " records have been found";
+                        }
+                    
                     var res = JSON.parse(s);
-                    $('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + escape(res.Title) + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
+
+                    movies.push(res.Title + ' (' + res.Year + ')');
+                    //$('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + escape(res.Title) + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
                     //$('#ChooseMovie').append('<tr class="movieRow"><td>' + res.Title + ' (' + res.Year  +')' + '</td></tr>');
                 }
             },
@@ -47,6 +69,7 @@
                 alert("Request: " + JSON.stringify(request));
             }
         });
+
         return pages;
     }
 
@@ -76,13 +99,12 @@
 
 <h2>WriteReview</h2>
 <div>
-    Search for movie to review<input id="searchText" onkeyup="MovieSearch()" type="text" placeholder="Enter at least 5 letters" />
-    <button  type="button">Search</button>
-    <button onclick="clearTable()" type="button">Clear</button>
-</div>
-<div style="width: 250px;height: 200px; overflow: scroll;overflow-x: hidden;">
-    <table style="width: 800px;" id="ChooseMovie"></table>
-</div>
+    <div class="ui-widget">
+        <span style="color: red;" id="foundCount"></span><br/>
+        <label for="moviePick">Search for Movie</label>
+        <input placeholder="Type at least 6 characters " onkeyup="MovieSearch()" id="moviePick">
+    </div></div>
+
 <div class="spacer-25"></div>
 @using (Html.BeginForm())
 {

@@ -1,0 +1,66 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+         function getData() {
+             var search = document.getElementById("tags");
+             var movies = [];
+            if (search.value.length < 5) {
+                //alert("Please enter at least 5 letters of the Movie Title");
+                return;
+             }
+             var p = 1;
+            //function callData(txt, p) {
+                $.ajax({
+                    url: 'http://www.omdbapi.com/?s=' + search.value + '*&apikey=c1eac364&page=' + p,
+                    type: 'GET',
+                    async: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        var n = data.Search.length;
+
+                        for (i = 0; i < n; i++) {
+                            var d = JSON.stringify(data);
+                            var dd = JSON.parse(d);
+                            var s = JSON.stringify(data.Search[i]);
+                            var count = dd.totalResults;
+                            pages = Math.ceil(count / n);
+                            var res = JSON.parse(s);
+
+                            
+                            movies.push(res.Title);
+                            //$('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + escape(res.Title) + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
+                            //$('#ChooseMovie').append('<tr class="movieRow"><td>' + res.Title + ' (' + res.Year  +')' + '</td></tr>');
+                        }
+                    },
+                    error: function (request, error) {
+                        alert("Request: " + JSON.stringify(request));
+                    }
+                });
+                //return pages;
+            //}
+
+
+
+            $( "#tags" ).autocomplete({
+                source: movies
+            });
+        } ;
+    </script>
+</head>
+<body>
+ 
+<div class="ui-widget">
+    <label for="tags">Tags: </label>
+    <input onkeyup="getData()" id="tags">
+</div>
+ 
+ 
+</body>
+</html>
