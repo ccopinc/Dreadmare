@@ -1,6 +1,7 @@
 ﻿<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/Scripts/jquery.ui.autocomplete.scroll.min.js"></script>
 <script type="text/javascript">
     var movies = [];
     var count;
@@ -27,17 +28,22 @@
             pages = callData(search.value, pages);
         }
 
-        if (pages < 6) {
+        //if (pages < 6) {
             if (pages > 1) {
                for (var p = 2; p < pages + 1; p++) {
                     callData(search.value, p);
                }
             }
-        }
+        //}
 
-        $("#moviePick" ).autocomplete({
+        $('#moviePick').autocomplete({
+            maxShowItems: 5, // Make list height fit to 5 items when items are over 5.
             source: movies
         });
+
+        //$("#moviePick" ).autocomplete({
+        //    source: movies
+        //});
 
     }
     function callData(txt, p) {
@@ -63,13 +69,13 @@
                         count = dd.totalResults;
                         var fc = document.getElementById("foundCount");
                         pages = Math.ceil(count / n);
-                        if (pages > 5) {
-                            fc.innerText = count +
-                                " records have been found.  Please enter more characters to narrow search.";
-                            return;
-                        } else {
-                            fc.innerText = count + " records have been found";
-                        }
+                        //if (pages > 5) {
+                        //    fc.innerText = count +
+                        //        " records have been found.  Please enter more characters to narrow search.";
+                        //    //return;
+                        //} else {
+                        //    fc.innerText = count + " records have been found";
+                        //}
 
                         var res = JSON.parse(s);
 
