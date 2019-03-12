@@ -2,6 +2,21 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="~/Scripts/jquery.ui.autocomplete.scroll.min.js"></script>
+<style type="text/css">
+    .LabelText {
+        width: 400px;
+
+    }
+    .TextText {
+        width: 400px;
+
+    }
+    .BigTextText {
+        width: 600px;
+ 
+    }
+
+</style>
 <script type="text/javascript">
     var movies = [];
     var count;
@@ -101,7 +116,9 @@
         select: function (event, ui) {
             var title = ui.item.value.split('|');
             var imdb = title[title.length - 1];
-            var movie = title[0];
+
+            var movieSplit = ui.item.value.split(')');
+            var movie = movieSplit[0] + ')';
             $("#imdbid").val(imdb);
             $("#movietitle").val(movie);
 
@@ -141,31 +158,31 @@
 {
     <div id="reviewSection">
         <fieldset>
-            <table style="font-size: 16pt; width: 800">
+            <table style="font-size: 10pt;">
                 <tr>
-                    <td>@Html.LabelFor(Model => Model.IMDBID)</td>
-                    <td colspan="3" >
-                        
-                        @Html.TextBoxFor(Model => Model.IMDBID, new { id = "imdbid" })
+                    <td>@Html.LabelFor(Model => Model.IMDBID, new{@class = "LabelText"})</td>
+                    <td>
+
+                        @Html.TextBoxFor(Model => Model.IMDBID, new { id = "imdbid", @class = "LabelText" })
                     </td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(Model => Model.MovieTitle)</td>
-                    <td colspan="3" style="color: black;">
-                        @Html.TextBoxFor(model => Model.MovieTitle, new {id = "movietitle"})
-                    </td>
-                </tr>
-                <tr>
-                    <td>@Html.LabelFor(Model => Model.Reviewer)</td>
-                    <td colspan="3">
+                    <td>@Html.LabelFor(Model => Model.Reviewer, new { @class = "LabelText" })</td>
+                    <td>
                         @Html.TextBoxFor(Model => Model.Reviewer)
                     </td>
                 </tr>
                 <tr>
+                    <td>@Html.LabelFor(Model => Model.MovieTitle, new { @class = "LabelText" })</td>
+                    <td class="BigTextText" colspan="3">
+                        @Html.TextBoxFor(model => Model.MovieTitle, new {id = "movietitle",@class = "BigTextText"})
+                    </td>
+                </tr>
+ 
+                <tr>
                     <td>@Html.LabelFor(Model => Model.Review)</td>
-                    <td colspan="3"><textarea id="review"></textarea></td>
+                    <td  colspan="3">@Html.TextAreaFor(Model => Model.Review, new { id = "moviereview", @class = "BigTextText" })</td>
                 </tr>
             </table>
+
         </fieldset>
     </div>
    
