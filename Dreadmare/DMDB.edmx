@@ -19,6 +19,7 @@
           <Property Name="Twitter" Type="nvarchar" MaxLength="100" />
           <Property Name="SnapChat" Type="nvarchar" MaxLength="100" />
           <Property Name="SecLevel" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="movie_Details">
           <Key>
@@ -138,6 +139,7 @@
           <Property Name="Twitter" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SnapChat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="SecLevel" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="movie_News">
           <Key>
@@ -230,6 +232,7 @@
           <EntitySetMapping Name="core_User">
             <EntityTypeMapping TypeName="dm_dbModel.core_User">
               <MappingFragment StoreEntitySet="core_User">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="SecLevel" ColumnName="SecLevel" />
                 <ScalarProperty Name="SnapChat" ColumnName="SnapChat" />
                 <ScalarProperty Name="Twitter" ColumnName="Twitter" />

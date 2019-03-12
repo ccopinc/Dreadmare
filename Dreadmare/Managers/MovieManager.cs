@@ -178,6 +178,13 @@ namespace Dreadmare.Managers
             return user;
         }
 
+        public int GetReviewerByUName(string uName)
+        {
+            string name = "";
+            var user = db.core_User.Where(u => u.UserName == uName).FirstOrDefault();
+            return user.id_User;
+        }
+
         public MovieDetails GetMovieDetailsByIMDBID(string id)
         {
             if (id == "")
@@ -190,6 +197,40 @@ namespace Dreadmare.Managers
             var response = client.DownloadString(url);
             movie = JsonConvert.DeserializeObject<MovieDetails>(response);
             return movie;
+        }
+
+        public GetReviews SaveReview(GetReviews review)
+        {
+            // Get total points avg score
+            int sum = review.ActingPoints + review.EffectsPoints + review.SoundPoints + review.ScriptPoints +
+                      review.OverAllPoints;
+            Double avg = sum / 5;
+            Double tp = Math.Round(avg, 0);
+            review.TotalPoints = int.Parse(tp.ToString());
+            review.id_Reviewer = GetReviewerByUName(review.Reviewer);
+
+            //  Parse out year from movie title
+            var s = review.MovieTitle.Split('(');
+            review.MovieTitle = s[0];
+
+            movie_Review movieReview = new movie_Review()
+            {
+                IMDB_ID = review.IMDBID,
+                MovieTitle = review.MovieTitle,
+                ReviewTitle = review.ReviewTitle,
+                id_Reviewer = review.id_Reviewer,
+                ActingPoints = review.ActingPoints,
+                OverAllPoints = review.OverAllPoints,
+                TotalScore = review.TotalPoints,
+                SoundPoints = review.SoundPoints,
+                ScriptPoints = review.ScriptPoints,
+                EffectsPoints = review.EffectsPoints,
+                ReviewDate = DateTime.Now.Date,
+                Review = review.Review
+            };
+            db.movie_Review.AddOrUpdate(movieReview);
+            db.SaveChanges();
+            return review;
         }
     }
 }

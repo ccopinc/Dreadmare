@@ -24,5 +24,6 @@ namespace Dreadmare
         public string Twitter { get; set; }
         public string SnapChat { get; set; }
         public int SecLevel { get; set; }
+        public string UserName { get; set; }
     }
 }

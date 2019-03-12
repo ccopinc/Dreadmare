@@ -12,8 +12,19 @@
 
     }
     .BigTextText {
+        max-width: 100%;
         width: 600px;
  
+    }
+
+    .RatingText {
+        max-width: 100%;
+        width: 100px;
+ 
+    }
+
+    .RowSpacer {
+        padding-bottom: 20px;
     }
 
 </style>
@@ -158,31 +169,61 @@
 {
     <div id="reviewSection">
         <fieldset>
-            <table style="font-size: 10pt;">
+            <table style="font-size: 12pt;">
                 <tr>
-                    <td>@Html.LabelFor(Model => Model.IMDBID, new{@class = "LabelText"})</td>
-                    <td>
+                    <td class="RowSpacer">@Html.LabelFor(Model => Model.IMDBID, new{@class = "LabelText"})</td>
+                    <td class="RowSpacer">
 
                         @Html.TextBoxFor(Model => Model.IMDBID, new { id = "imdbid", @class = "LabelText" })
                     </td>
-                    <td>@Html.LabelFor(Model => Model.Reviewer, new { @class = "LabelText" })</td>
-                    <td>
+                    <td class="RowSpacer">@Html.LabelFor(Model => Model.Reviewer, new { @class = "LabelText" })</td>
+                    <td class="RowSpacer">
                         @Html.TextBoxFor(Model => Model.Reviewer)
                     </td>
                 </tr>
                 <tr>
-                    <td>@Html.LabelFor(Model => Model.MovieTitle, new { @class = "LabelText" })</td>
-                    <td class="BigTextText" colspan="3">
+                    <td class="RowSpacer">@Html.LabelFor(Model => Model.MovieTitle, new { @class = "LabelText" })</td>
+                    <td  class="RowSpacer" colspan="3">
                         @Html.TextBoxFor(model => Model.MovieTitle, new {id = "movietitle",@class = "BigTextText"})
                     </td>
                 </tr>
  
                 <tr>
-                    <td>@Html.LabelFor(Model => Model.Review)</td>
-                    <td  colspan="3">@Html.TextAreaFor(Model => Model.Review, new { id = "moviereview", @class = "BigTextText" })</td>
+                    <td class="RowSpacer">@Html.LabelFor(Model => Model.Review)</td>
+                    <td class="RowSpacer"  colspan="3">@Html.TextAreaFor(Model => Model.Review, new { id = "moviereview", @class = "BigTextText" })</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table>
+                            <tr>
+                                <td colspan="6">
+                                    Please enter a rating for the following categories 1-5 (1 = Bad, 2 = Poor, 3 = Fair, 4 = Good, 5 = Excellent).
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(Model => Model.ActingPoints)</td>
+                                <td>@Html.TextBoxFor(Model => Model.ActingPoints, new { @class = "RatingText", id = "actingPoints" })</td>
+                                <td>@Html.LabelFor(Model => Model.SoundPoints)</td>
+                                <td>@Html.TextBoxFor(Model => Model.SoundPoints, new { @class = "RatingText", id = "actingPoints" })</td>
+                                <td>@Html.LabelFor(Model => Model.ScriptPoints)</td>
+                                <td>@Html.TextBoxFor(Model => Model.ScriptPoints, new { @class = "RatingText", id = "actingPoints" })</td>
+                            </tr>
+                            <tr>
+                                <td>@Html.LabelFor(Model => Model.EffectsPoints)</td>
+                                <td>@Html.TextBoxFor(Model => Model.EffectsPoints, new { @class = "RatingText", id = "actingPoints" })</td>
+                                <td>@Html.LabelFor(Model => Model.OverAllPoints)</td>
+                                <td>@Html.TextBoxFor(Model => Model.OverAllPoints, new { @class = "RatingText", id = "actingPoints" })</td>
+                                <td>@Html.LabelFor(Model => Model.OverAllPoints)</td>
+                                <td>@Html.TextBoxFor(Model => Model.OverAllPoints, new { @class = "RatingText", id = "actingPoints", @readonly = true })
+                                        ;
+}
+                                })</td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
             </table>
-
+            <button class="w3-btn-red" type="submit">Save</button>
         </fieldset>
     </div>
    

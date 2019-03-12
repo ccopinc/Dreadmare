@@ -38,8 +38,15 @@ namespace Dreadmare.Controllers
 
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/Movie/WriteReview/")]
-        public ActionResult WriteReview(GetReviews review)
+        public ActionResult WriteReview(GetReviews model)
         {
+            GetReviews review = new GetReviews();
+            if (model.Review != null)
+            {
+                movieManager.SaveReview(model);
+                review = model;
+            }
+
             return View(review);
         }
 

@@ -3,7 +3,7 @@
 AS
 BEGIN
 	SELECT
-		u.FirstName,
+		u.UserName as FirstName,
 		(SELECT 
 			COUNT(mr.id_Reviewer) 
 		FROM movie_Review mr
