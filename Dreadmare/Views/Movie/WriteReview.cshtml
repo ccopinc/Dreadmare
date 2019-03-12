@@ -10,31 +10,30 @@
     }
 
     function MovieSearch(isButClick) {
-        var rb = document.getElementById("exact").checked;
-        if (isButClick === false && rb===true) {
-            return true;
-        } 
 
         var search = document.getElementById("moviePick");
-        if (search.value.length < 5) {
+        if (search.value.length < 3) {
             
             return;
         }
 
         clearTable();
+        var fc = document.getElementById("foundCount");
+        fc.innerText = "Searching for movies";
+        fc.style.color = "silver";
 
         var pages = 1;
         if (pages === 1) {
             pages = callData(search.value, pages);
         }
 
-        //if (pages < 6) {
+        if (pages < 8) {
             if (pages > 1) {
                for (var p = 2; p < pages + 1; p++) {
                     callData(search.value, p);
                }
             }
-        //}
+        }
 
         $('#moviePick').autocomplete({
             maxShowItems: 10, // Make list height fit to 5 items when items are over 5.
@@ -47,56 +46,45 @@
 
     }
     function callData(txt, p) {
-        var rb = document.getElementById("exact").checked;
-        if (document.getElementById("exact").checked) {
-            txt = 't=' + txt;
-        } else {
-                txt = 's=' + txt + '*';
-        }
-
+        var fc = document.getElementById("foundCount");
         $.ajax({
-            url: 'http://www.omdbapi.com/?' + txt + '&apikey=c1eac364&page=' + p,
+            url: 'http://www.omdbapi.com/?s=' + txt + '*&apikey=c1eac364&page=' + p,
             type: 'GET',
             async: false,
             dataType: 'json',
             success: function (data) {
-                if (rb == false) {
+                var d = JSON.stringify(data);
+                var dd = JSON.parse(d);
+                if (dd.Response == "False") {
+                    fc.innerText = "Error in data search.  Keep typing.";
+                    fc.style.color = "tomato";
+                    return;
+                }
                     var n = data.Search.length;
                     for (i = 0; i < n; i++) {
-                        var d = JSON.stringify(data);
-                        var dd = JSON.parse(d);
                         var s = JSON.stringify(data.Search[i]);
                         count = dd.totalResults;
-                        var fc = document.getElementById("foundCount");
+                        
                         pages = Math.ceil(count / n);
-                        //if (pages > 5) {
-                        //    fc.innerText = count +
-                        //        " records have been found.  Please enter more characters to narrow search.";
-                        //    //return;
-                        //} else {
-                        //    fc.innerText = count + " records have been found";
-                        //}
+                        fc.style.color = 'tomato';
+                        if (pages > 8) {
+                            fc.innerText = count +
+                                " records have been found.  Please enter more characters to narrow search.";
+                            return;
+                        } else {
+                            if (count < 81) {
+                                fc.innerText = count + " records have been found";
+                                }
+                        }
 
                         var res = JSON.parse(s);
 
-                        movies.push(res.Title + ' (' + res.Year + ')');
+                        movies.push(res.Title + ' (' + res.Year + ')' + ' IMDB# |' + res.imdbID);
+                        fc.style.color = 'silver';
                         //$('#ChooseMovie').append('<tr class="movieRow"><td><a href="#" onclick=selectMovie("' + escape(res.Title) + '","' + res.imdbID + '")>' + res.Title + ' (' + res.Year + ')' + '</a></td></tr>');
                         //$('#ChooseMovie').append('<tr class="movieRow"><td>' + res.Title + ' (' + res.Year  +')' + '</td></tr>');
                     }
-                } else {
-                    var d = JSON.stringify(data);
-                    var dd = JSON.parse(d);
-                    pages = 1;
-                    movies.push('');
-                    movies.push(dd.Title + ' (' + dd.Year + ')');
-                    if (dd.Title.length > 0) {
-                        showRSec();
-                        var fc = document.getElementById("foundCount");
-                        fc.innerText = "Movie found";
-                        fc.style.color = "silver";
-                    }
-                   
-                }
+                
             },
             error: function (request, error) {
                 alert("Request: " + JSON.stringify(request));
@@ -106,74 +94,65 @@
         return pages;
     }
 
-    function selectMovie(name, id) {
-        var send = name + "|" + id;
-        $.ajax({
-            url: '/Movie/SetMovieObject/' + send,
-            type: 'GET',
-            success: function (data) {
-                location.reload(true);
-            },
-            error: function (request, error) {
-                alert("Request: " + JSON.stringify(request));
-            }
+
+    $(document).ready(function () {
+    $( "#moviePick" ).autocomplete({
+
+        select: function (event, ui) {
+            var title = ui.item.value.split('|');
+            var imdb = title[title.length - 1];
+            var movie = title[0];
+            $("#imdbid").val(imdb);
+            $("#movietitle").val(movie);
+
+            return false;
+        }
         });
-        clearTable();
-    }
+
+        $("input").each(function(){  
+            $(this).val("");  
+        });  
+    });
 
 
-    function showButton() {
-        var but = document.getElementById("searchButton");
-        but.style.display = 'inline-block';
-    }
-    function hideButton() {
-        var but = document.getElementById("searchButton");
-        but.style.display = 'none';
-    }
-
-    function showRSec() {
-         
-        if (document.getElementById("moviePick").value.length > 3) {
-            document.getElementById("reviewSection").style.display = "block";
-            }
-
-    }
 
 </script>
+@using System.ComponentModel
 @model Dreadmare.DTOModels.GetReviews
 
 @{
     ViewBag.Title = "WriteReview";
+    
     Layout = "~/Views/Shared/_Layout1.cshtml";
+
+    
 }
 
 <h2>WriteReview</h2>
 <div>
     <div class="ui-widget">
         <label for="moviePick">Search for Movie</label><br />
-        <input type="radio" value="exact" onclick="showButton()" id="exact" name="rSelect"  /><label for="exact">Search for this exact title</label><br />
-        <input type="radio" checked id="any" value="any" name="rSelect" /><label for="any">Search starts with this text</label><br />
-        <input placeholder="Type at least 3 characters" onclick="showRSec()" onkeyup="MovieSearch(false)" id="moviePick" style="width: 400px;">
-        <button id="searchButton" class="w3-button w3-red" style="display: none;" onclick="MovieSearch(true)">Search</button><br/>
-        <span style="color: red;" id="foundCount"></span>
+        <input placeholder="Enter at least first 3 characters of title" onkeyup="MovieSearch(false)" id="moviePick" style="width: 400px;">
+        <br/><span style="color: red;" id="foundCount"></span>
     </div></div>
 
 <div class="spacer-25"></div>
 @using (Html.BeginForm())
 {
-    <div id="reviewSection" style="display: none;">
+    <div id="reviewSection">
         <fieldset>
             <table style="font-size: 16pt; width: 800">
                 <tr>
                     <td>@Html.LabelFor(Model => Model.IMDBID)</td>
-                    <td colspan="3" style="color: black;">
-                        @Html.EditorFor(Model => Model.IMDBID)
+                    <td colspan="3" >
+                        
+                        @Html.TextBoxFor(Model => Model.IMDBID, new { id = "imdbid" })
                     </td>
                 </tr>
                 <tr>
                     <td>@Html.LabelFor(Model => Model.MovieTitle)</td>
                     <td colspan="3" style="color: black;">
-                        @Html.TextBoxFor(model => Model.MovieTitle, new { htmlAttributes = new { @class = "form-control" } }))
+                        @Html.TextBoxFor(model => Model.MovieTitle, new {id = "movietitle"})
                     </td>
                 </tr>
                 <tr>
@@ -189,4 +168,5 @@
             </table>
         </fieldset>
     </div>
+   
 }

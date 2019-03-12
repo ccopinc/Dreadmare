@@ -34,26 +34,28 @@ namespace Dreadmare.Controllers
             return PartialView("ReviewDetails", review);
         }
 
+
+
         [System.Web.Http.HttpPost]
         [System.Web.Http.Route("api/Movie/WriteReview/")]
         public ActionResult WriteReview(GetReviews review)
         {
-           
             return View(review);
         }
 
 
         [System.Web.Http.HttpGet]
-        [System.Web.Http.Route("api/Movie/SetMovieObject/{id}")]
+        [System.Web.Http.Route("api/Movie/WriteReview/{id}")]
         public ActionResult SetMovieObject(string id)
         {
-            var data = id.Split('|');
+
+            var movie = movieManager.GetMovieDetailsByIMDBID(id);
             GetReviews review = new GetReviews()
             {
-                MovieTitle = data[0],
-                IMDBID = data[1]
+                MovieTitle = movie.Title,
+                IMDBID = movie.IMDBID
             };
-
+            ModelState.Clear();
             return View("WriteReview", review);
         }
 

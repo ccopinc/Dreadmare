@@ -16,7 +16,7 @@ namespace Dreadmare.Managers
     public class MovieManager
     {
         dm_dbEntities db = new dm_dbEntities();
-        
+        string apiKey = "c1eac364";
 
         public ReviewsViewModel GetMovieReviewList()
         {
@@ -84,7 +84,7 @@ namespace Dreadmare.Managers
         public ReviewDetails GetMovieDetails(ReviewDetails review)
         {
             // used for http://www.omdbapi.com
-            string apiKey = "c1eac364";
+           
 
             //First Check if movie exists in db
             var movie = db.movie_Details.Where(m => m.Title == review.MovieTitle).FirstOrDefault();
@@ -176,6 +176,20 @@ namespace Dreadmare.Managers
             string name = "";
             var user = db.up_movie_GetReviewerInfo(id).FirstOrDefault();
             return user;
+        }
+
+        public MovieDetails GetMovieDetailsByIMDBID(string id)
+        {
+            if (id == "")
+            {
+                return null;
+            }
+            MovieDetails movie = new MovieDetails();
+            string url = "http://www.omdbapi.com?i=" + id + "&apikey=" + apiKey;
+            var client = new WebClient();
+            var response = client.DownloadString(url);
+            movie = JsonConvert.DeserializeObject<MovieDetails>(response);
+            return movie;
         }
     }
 }
